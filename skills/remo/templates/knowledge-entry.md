@@ -4,6 +4,10 @@
 
 The language chosen for this project's Repo Memory.
 
+## Status
+
+To be filled | Draft | Current | Needs review | Deprecated
+
 ## Summary
 
 The shortest useful explanation of this knowledge.
@@ -21,6 +25,14 @@ Where this knowledge is relevant in the project.
 ## Practical Guidance
 
 How future agents or contributors should use this knowledge.
+
+## Context ROI
+
+Explain why this entry is worth loading instead of rediscovering from the codebase.
+
+## Evidence
+
+- File, commit, PR, log, or user decision that supports this knowledge.
 
 ## Related Files
 

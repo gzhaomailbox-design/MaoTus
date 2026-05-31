@@ -16,6 +16,10 @@
 | 了解 ReMo 的目标和当前设计 | `project-overview.md` |
 | 新增或调整 skill 项目 | `project-overview.md` |
 | 判断是否需要更新项目知识 | `project-overview.md` |
+| 判断日志或知识是否详略得当 | `project-overview.md`，并参考 `skills/remo/SKILL.md` 的 Methodology 和 Quality Bar |
+| 准备 commit 或 push | `project-overview.md`，并执行 `skills/remo/SKILL.md` 的 Commit And Push Checkpoint |
+| 将 ReMo 后期安装到已有项目 | `project-overview.md`，并参考 `skills/remo/templates/knowledge-index.md` 和 `skills/remo/templates/baseline-knowledge.md` |
+| 根据 GitHub commit 历史回溯项目日志和知识 | `project-overview.md`，并参考 `skills/remo/SKILL.md` 的初始化流程 |
 | 查找尚未沉淀的技术架构、业务流程、约定、FAQ | 查看下方“已知缺口” |
 
 ## 当前知识文件
@@ -44,7 +48,14 @@
 - 知识文件用途发生变化时，必须更新“当前知识文件”说明。
 - 不要为了完整目录而创建空知识文件；只在有稳定内容时创建。
 - 日志文件不列入本索引，除非某条日志成为重要决策来源。
-- `.remo/logs/` 和 `.remo/knowledge/` 都应使用当前记忆语言。
+- `.remo/logs/` 按年月日分文件夹存储，路径格式为 `.remo/logs/YYYY/MM/DD/HHMM-记忆语言标题.md`。
+- `.remo/logs/` 的文件名标题段和日志内容都应使用当前记忆语言。
+- `.remo/knowledge/` 的知识内容应使用当前记忆语言。
+- ReMo 初始化到已有项目时，应创建完整基线知识文档集合，并用 `Status: To be filled` 标记尚未确认的内容。
+- 如果项目关联了 GitHub 或其他 Git remote，初始化时应分析 commit 历史，把重要阶段回溯成高信号日志，并用历史证据校准基线知识文件。
+- 写入日志或知识前必须应用 Context ROI：只有当记忆能减少未来上下文成本、避免重复推理或降低错误风险时才写入。
+- 使用 SKR 作为写作标准：每句话都应帮助未来 Agent 理解、决策或避免重复发现。
+- 每次 commit 和 push 都是强制 ReMo checkpoint：必须生成或更新日志，并同步受影响的知识文件和索引。
 
 ## 最后更新
 

@@ -17,6 +17,24 @@ Project memory location:
 
 Memory language: Simplified Chinese.
 
+Methodology:
+
+- Route before read: read `.remo/knowledge/index.md` before broad codebase exploration.
+- Distill before store: store stable project understanding, not raw transcripts or obvious code facts.
+- Evidence before trust: connect important claims to files, commits, PRs, logs, or user decisions.
+- Context ROI: write memory only when it will save more future context than it costs to read.
+- SKR: keep every log and knowledge sentence high-signal.
+
+If `.remo/knowledge/index.md` is missing, initialize ReMo before broad exploration:
+
+- Create `.remo/logs/` and `.remo/knowledge/`.
+- Create `index.md`, `project-overview.md`, `architecture.md`, `domain-model.md`, `workflows.md`, `decisions.md`, `conventions.md`, `faq.md`, and `glossary.md`.
+- Fill safe facts from existing docs and top-level structure.
+- If the project has a Git remote, inspect commit history and group important historical commits into retrospective logs and more accurate baseline knowledge. Do not create one log per commit.
+- Mark unknown sections as `Status: To be filled` with concrete open questions.
+- Add every baseline knowledge file to `index.md`.
+- Create an installation log in Simplified Chinese.
+
 Before broad codebase exploration:
 
 - Read `.remo/knowledge/index.md` if it exists.
@@ -29,7 +47,16 @@ Before finishing meaningful work, do a ReMo check:
 - Did this work produce stable project knowledge that should help future agents avoid rediscovery? If yes, update `.remo/knowledge/`.
 - Did this work change or invalidate existing knowledge? If yes, update the relevant knowledge file.
 - Did this work add, rename, or change the purpose of a knowledge file? If yes, update `.remo/knowledge/index.md`.
+- Would the memory fail the Context ROI test? If yes, do not write it.
 
-Use log filenames like `.remo/logs/YYYY-MM-DD-HHMM-short-title.md`.
+Commit and push checkpoint:
 
-Keep logs and knowledge entries in Simplified Chinese, source-aware, and explicit about open questions.
+- Every commit and push must generate or update a ReMo log entry.
+- Before committing, update affected `.remo/knowledge/` files and `.remo/knowledge/index.md` if the staged work changes durable project understanding.
+- Include the ReMo updates in the same commit when they describe that commit's work.
+- After pushing, update the log entry with commit hash, branch, remote, and push outcome when available.
+- If no durable knowledge changed, state that in the log with the reason instead of inventing low-signal knowledge.
+
+Use log paths like `.remo/logs/YYYY/MM/DD/HHMM-中文标题.md`. Store logs in year/month/day folders, keep the file timestamp numeric, and write the title segment in Simplified Chinese.
+
+Keep log filenames, logs, and knowledge entries in Simplified Chinese, source-aware, and explicit about open questions.
