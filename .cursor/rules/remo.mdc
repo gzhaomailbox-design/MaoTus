@@ -1,0 +1,35 @@
+---
+description: Keep MaoTus project memory updated with ReMo.
+alwaysApply: true
+---
+
+# ReMo Project Memory
+
+Use ReMo to keep this repository's project memory current.
+
+Canonical ReMo source: `skills/remo/SKILL.md`.
+
+Project memory location:
+
+- Process logs: `.remo/logs/`
+- Project knowledge: `.remo/knowledge/`
+- Knowledge index: `.remo/knowledge/index.md`
+
+Memory language: Simplified Chinese.
+
+Before broad codebase exploration:
+
+- Read `.remo/knowledge/index.md` if it exists.
+- Use the index to select the smallest relevant knowledge files.
+- Scan code only when the knowledge base is missing, stale, contradicted, or not specific enough.
+
+Before finishing meaningful work, do a ReMo check:
+
+- Did this work create a milestone, decision, pivot, or important checkpoint? If yes, update `.remo/logs/`.
+- Did this work produce stable project knowledge that should help future agents avoid rediscovery? If yes, update `.remo/knowledge/`.
+- Did this work change or invalidate existing knowledge? If yes, update the relevant knowledge file.
+- Did this work add, rename, or change the purpose of a knowledge file? If yes, update `.remo/knowledge/index.md`.
+
+Use log filenames like `.remo/logs/YYYY-MM-DD-HHMM-short-title.md`.
+
+Keep logs and knowledge entries in Simplified Chinese, source-aware, and explicit about open questions.
