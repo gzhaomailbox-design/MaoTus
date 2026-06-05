@@ -1,9 +1,9 @@
 ---
 name: session-token-auditor
-description: Estimate and explain token usage composition for Cursor sessions by analyzing local agent transcript JSONL files. Use when the user asks to inspect session token consumption, token breakdown, transcript cost composition, or why a Cursor session used many tokens.
+description: 通过分析本地 Agent transcript JSONL 文件，估算并解释 Cursor 会话 token 消耗组成。用户要求检查会话 token 消耗、token 拆解、transcript 成本组成，或询问为什么某个 Cursor 会话消耗很多 token 时使用。
 ---
 
-# Session Token 分析器
+# 会话 Token 分析器
 
 ## 版本
 
@@ -64,7 +64,7 @@ description: Estimate and explain token usage composition for Cursor sessions by
    - 先说明总估算 token 和最大消耗类别。
    - 使用报告中的表格说明类别、角色和最大条目，而不是只用散列项目符号。
    - 使用树状拆解图说明总量如何分解到类别和典型大条目。
-   - 再指出 top entries 中最值得优化的来源，例如大段工具结果、重复上下文、长用户输入、过多文件内容或冗长 assistant 输出。
+   - 再指出最大条目中最值得优化的来源，例如大段工具结果、重复上下文、长用户输入、过多文件内容或冗长 assistant 输出。
    - 如果 transcript 缺少真实 `usage` 字段，明确输出是估算。
 
 4. 给出优化建议。
@@ -90,7 +90,7 @@ description: Estimate and explain token usage composition for Cursor sessions by
 ## 树状拆解
 
 ```text
-Session total
+会话总量
 ├── [类别 1] [token, 占比]
 │   └── [最大条目摘要]
 └── [类别 2] [token, 占比]
@@ -101,7 +101,7 @@ Session total
 
 | 排名 | 行号 | 角色 | 类别 | 类型 | 估算 token | 摘要 |
 | ---: | ---: | --- | --- | --- | ---: | --- |
-| 1 | [line] | [role] | [category] | [kind] | [token] | [summary] |
+| 1 | [行号] | [角色] | [类别] | [类型] | [token] | [摘要] |
 
 ## 优化建议
 

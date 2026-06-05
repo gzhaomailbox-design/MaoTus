@@ -1,23 +1,23 @@
 # MaoTus
 
-MaoTus is a repository for managing skills summarized from Vibe Coding practice.
+MaoTus 是一个用于管理 Vibe Coding 实践中沉淀出来的 skills 的仓库。
 
-The project collects reusable workflows, prompts, templates, and project knowledge that can help future AI-assisted development sessions start faster and work with better context.
+这个项目收集可复用的工作流、提示词、模板和项目知识，让后续 AI 辅助开发会话能更快进入状态，并使用更准确的上下文。
 
-## First Skill: ReMo
+## 第一个 Skill：ReMo
 
-The first skill is ReMo, short for Repo Memory.
+第一个 skill 是 ReMo，也就是 Repo Memory。
 
-ReMo helps Vibe Coding projects continuously preserve two kinds of memory:
+ReMo 帮助 Vibe Coding 项目持续保存两类记忆：
 
-- Process logs for milestones, decisions, pivots, and iteration history.
-- Distilled project knowledge for architecture, business flows, product model, terminology, constraints, and FAQs.
+- 过程日志：记录里程碑、决策、方向调整和迭代历史。
+- 项目知识：沉淀架构、业务流程、产品模型、术语、约束和常见问题。
 
-See [skills/remo](skills/remo) for the skill source and templates.
+Skill 源文件和模板见 [skills/remo](skills/remo)。
 
 ## Repo Memory
 
-This repository uses ReMo itself:
+本仓库本身也使用 ReMo：
 
-- `.remo/logs/` records important project progress.
-- `.remo/knowledge/` stores curated knowledge for future work.
+- `.remo/logs/` 记录重要项目进展。
+- `.remo/knowledge/` 保存供未来任务复用的高信号项目知识。

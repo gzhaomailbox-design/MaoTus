@@ -1,55 +1,55 @@
-# Knowledge Topic
+# 知识主题
 
-## Language
+## 语言
 
-The language chosen for this project's Repo Memory.
+本项目 Repo Memory 选择使用的语言。
 
-## Status
+## 状态
 
-To be filled | Draft | Current | Needs review | Deprecated
+待补充 | 草稿 | 当前有效 | 需要复核 | 已废弃
 
-## Summary
+## 摘要
 
-The shortest useful explanation of this knowledge.
+用尽可能短但有用的方式解释这条知识。
 
-## Applies To
+## 适用范围
 
-Where this knowledge is relevant in the project.
+说明这条知识在项目中的适用位置或任务范围。
 
-## Current Understanding
+## 当前理解
 
-- Fact or principle 1.
-- Fact or principle 2.
-- Fact or principle 3.
+- 事实或原则 1。
+- 事实或原则 2。
+- 事实或原则 3。
 
-## Practical Guidance
+## 实践指导
 
-How future agents or contributors should use this knowledge.
+说明未来 Agent 或贡献者应如何使用这条知识。
 
 ## Context ROI
 
-Explain why this entry is worth loading instead of rediscovering from the codebase.
+说明为什么这条知识值得加载，而不是每次从代码库重新发现。
 
-## Evidence
+## 证据
 
-- File, commit, PR, log, or user decision that supports this knowledge.
+- 支持这条知识的文件、commit、PR、日志或用户决策。
 
-## Related Files
+## 相关文件
 
 - `path/to/file`
 
-## Index Update
+## 索引更新
 
-If this is a new knowledge file, update `.remo/knowledge/index.md` with:
+如果这是新的知识文件，更新 `.remo/knowledge/index.md`，说明：
 
-- What this file is for.
-- Which task types should read it.
-- Whether it replaces or overlaps any existing knowledge file.
+- 本文件的用途。
+- 哪些任务类型应该读取它。
+- 它是否替代或重叠已有知识文件。
 
-## Open Questions
+## 待确认问题
 
-- Unknown or assumption that still needs validation.
+- 仍需验证的未知项或假设。
 
-## Last Updated
+## 最后更新
 
 YYYY-MM-DD

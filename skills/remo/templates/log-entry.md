@@ -1,48 +1,48 @@
-# YYYY-MM-DD HH:MM Title In Memory Language
+# YYYY-MM-DD HH:MM 记忆语言标题
 
-Recommended filename:
+推荐文件名：
 
 ```text
-.remo/logs/YYYY/MM/DD/HHMM-title-in-memory-language.md
+.remo/logs/YYYY/MM/DD/HHMM-记忆语言标题.md
 ```
 
-Store logs in year/month/day folders. Keep the file timestamp numeric for sorting within a day. Write the title segment in the project's memory language.
+日志按年/月/日分文件夹保存。文件时间戳保持数字，方便当天排序。标题段使用项目记忆语言。
 
-## Type
+## 类型
 
-Milestone | Decision | Pivot | Experiment | Release | Incident | Retrospective
+里程碑 | 决策 | 方向调整 | 实验 | 发布 | 事故 | 回溯
 
-## Summary
+## 摘要
 
-One short paragraph describing what changed or what was learned.
+用一个短段落说明发生了什么变化，或学到了什么。
 
-## Context
+## 背景
 
-Why this mattered at this point in the project.
+说明这件事为什么在当前项目阶段重要。
 
-## Key Details
+## 关键细节
 
-- Detail 1.
-- Detail 2.
-- Detail 3.
+- 细节 1。
+- 细节 2。
+- 细节 3。
 
-## Decision Or Outcome
+## 决策或结果
 
-What was decided, completed, paused, rejected, or learned.
+说明决定了什么、完成了什么、暂停了什么、否定了什么或学到了什么。
 
-## Commit And Push
+## Commit 和 Push
 
-- Commit: hash or `not committed yet`
-- Branch: branch name
-- Remote: remote name and URL when relevant
-- Push outcome: pushed, not pushed yet, failed, or not applicable
-- Knowledge update: which `.remo/knowledge/` files changed, or why no durable knowledge changed
+- Commit：hash 或 `尚未提交`
+- Branch：分支名
+- Remote：相关时记录 remote 名称和 URL
+- Push 结果：已推送、尚未推送、失败或不适用
+- 知识更新：哪些 `.remo/knowledge/` 文件发生变化，或为什么没有长期知识变化
 
-## Follow-Up
+## 后续
 
-- [ ] Follow-up action.
-- [ ] Open question.
+- [ ] 后续动作。
+- [ ] 待确认问题。
 
-## Sources
+## 来源
 
-- Relevant files, commits, PRs, chat context, or external references.
+- 相关文件、commit、PR、聊天上下文或外部引用。

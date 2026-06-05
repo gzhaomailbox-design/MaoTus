@@ -1,48 +1,48 @@
-# Knowledge File Title
+# 知识文件标题
 
-## Status
+## 状态
 
-To be filled | Draft | Current | Needs review | Deprecated
+待补充 | 草稿 | 当前有效 | 需要复核 | 已废弃
 
-## Memory Language
+## 记忆语言
 
-[chosen memory language]
+[选择的记忆语言]
 
-## Purpose
+## 用途
 
-What belongs in this file and when future agents should read it.
+说明这个文件应保存什么内容，以及未来 Agent 应在什么任务中读取它。
 
-## Current Understanding
+## 当前理解
 
-- Known fact or principle.
-- Known fact or principle.
-- Known fact or principle.
+- 已知事实或原则。
+- 已知事实或原则。
+- 已知事实或原则。
 
-## Practical Guidance
+## 实践指导
 
-How future agents or contributors should use this knowledge.
+说明未来 Agent 或贡献者应如何使用这些知识。
 
 ## Context ROI
 
-Why this file saves future context or prevents likely mistakes.
+说明这个文件为什么能节省未来上下文，或避免高概率错误。
 
-## Evidence
+## 证据
 
-- File, commit, PR, log, or user decision that supports this knowledge.
+- 支持这些知识的文件、commit、PR、日志或用户决策。
 
-## Related Files
+## 相关文件
 
 - `path/to/file`
 
-## Open Questions
+## 待确认问题
 
-- Specific unknown to investigate.
-- Specific unknown to investigate.
+- 需要调查的具体未知项。
+- 需要调查的具体未知项。
 
-## Index Update
+## 索引更新
 
-Ensure `.remo/knowledge/index.md` routes relevant task types to this file.
+确保 `.remo/knowledge/index.md` 将相关任务类型路由到本文件。
 
-## Last Updated
+## 最后更新
 
 YYYY-MM-DD

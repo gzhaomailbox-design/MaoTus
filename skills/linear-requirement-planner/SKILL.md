@@ -1,6 +1,6 @@
 ---
 name: linear-requirement-planner
-description: Read Linear issues by issue ID, judge whether they describe software requirements, ask strict product-manager clarification questions for ambiguity, create requirement planning documents under docs/01_designing/milestone/<YYYY-MM-DD-milestone-name>, and comment the plan summary plus expected GitHub link back to Linear. Use when the user gives a Linear issue ID and asks to turn it into a product or software requirement plan.
+description: 按 issue ID 读取 Linear 问题，判断它是否是软件需求，对模糊点提出严格的产品经理澄清问题，在 docs/01_designing/milestone/<YYYY-MM-DD-milestone-name> 下创建需求规划文档，并把计划摘要和预期 GitHub 链接评论回 Linear。用户提供 Linear issue ID 并要求转成产品或软件需求计划时使用。
 ---
 
 # Linear 需求规划器

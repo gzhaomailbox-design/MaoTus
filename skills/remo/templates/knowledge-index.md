@@ -1,83 +1,83 @@
-# Knowledge Index
+# 知识索引
 
-## Memory Language
+## 记忆语言
 
-[chosen memory language]
+[选择的记忆语言]
 
-## How To Use
+## 使用方式
 
-Read this index before broad codebase exploration. Select the smallest useful set of knowledge files for the task. Scan code only when the knowledge base is missing, stale, contradicted, or not specific enough.
+大范围探索代码库之前先读取本索引。根据任务选择最小可用知识文件集合。只有当知识库缺失、过期、互相矛盾或不够具体时才扫描代码。
 
-## Task Routing
+## 任务路由
 
-| Task Type | Read First |
+| 任务类型 | 优先读取 |
 | --- | --- |
-| Project direction, scope, or current status | `project-overview.md` |
-| Technical structure, runtime, deployment, or data flow | `architecture.md` |
-| Business entities, domain concepts, or data relationships | `domain-model.md` |
-| User flows, operational flows, or repeatable processes | `workflows.md` |
-| Prior tradeoffs or important choices | `decisions.md` |
-| Coding style, naming, API, testing, or repo conventions | `conventions.md` |
-| Repeated questions or known issues | `faq.md` |
-| Terms, abbreviations, or domain vocabulary | `glossary.md` |
+| 项目方向、范围或当前状态 | `project-overview.md` |
+| 技术结构、运行时、部署或数据流 | `architecture.md` |
+| 业务实体、领域概念或数据关系 | `domain-model.md` |
+| 用户流程、运营流程或可复用流程 | `workflows.md` |
+| 历史取舍或重要选择 | `decisions.md` |
+| 编码风格、命名、API、测试或仓库约定 | `conventions.md` |
+| 重复问题或已知问题 | `faq.md` |
+| 术语、缩写或领域词汇 | `glossary.md` |
 
-## Knowledge Files
+## 知识文件
 
 ### `project-overview.md`
 
-Purpose: project purpose, scope, current direction, memory language, and high-level context.
+用途：记录项目目标、范围、当前方向、记忆语言和高层上下文。
 
-Status: To be filled
+状态：待补充
 
 ### `architecture.md`
 
-Purpose: technical architecture, modules, services, data flow, runtime, deployment, and integrations.
+用途：记录技术架构、模块、服务、数据流、运行时、部署和集成。
 
-Status: To be filled
+状态：待补充
 
 ### `domain-model.md`
 
-Purpose: business/domain entities, relationships, invariants, and important data concepts.
+用途：记录业务或领域实体、关系、不变量和重要数据概念。
 
-Status: To be filled
+状态：待补充
 
 ### `workflows.md`
 
-Purpose: user journeys, operational processes, development workflows, import/export flows, and other repeatable flows.
+用途：记录用户旅程、运营流程、开发工作流、导入导出流程和其他可复用流程。
 
-Status: To be filled
+状态：待补充
 
 ### `decisions.md`
 
-Purpose: durable product and technical decisions, tradeoffs, rejected options, and reasons.
+用途：记录长期有效的产品和技术决策、取舍、被否定方案及原因。
 
-Status: To be filled
+状态：待补充
 
 ### `conventions.md`
 
-Purpose: coding conventions, file naming, API patterns, testing practices, style rules, and repo-specific norms.
+用途：记录编码约定、文件命名、API 模式、测试实践、风格规则和仓库特定规范。
 
-Status: To be filled
+状态：待补充
 
 ### `faq.md`
 
-Purpose: repeated questions, common pitfalls, troubleshooting notes, and known gotchas.
+用途：记录重复问题、常见坑、排查笔记和已知注意事项。
 
-Status: To be filled
+状态：待补充
 
 ### `glossary.md`
 
-Purpose: domain terms, abbreviations, internal names, and shared vocabulary.
+用途：记录领域术语、缩写、内部名称和共享词汇。
 
-Status: To be filled
+状态：待补充
 
-## Maintenance Rules
+## 维护规则
 
-- Update this index when knowledge files are added, removed, renamed, or repurposed.
-- Keep task routing current.
-- Keep log filename title segments, log content, and knowledge content in the memory language.
-- Prefer updating an existing baseline file over creating duplicate knowledge files.
+- 新增、删除、重命名或改变知识文件用途时，更新本索引。
+- 保持任务路由有效。
+- 日志文件名标题段、日志内容和知识内容使用记忆语言。
+- 优先更新现有基线文件，避免创建重复知识文件。
 
-## Last Updated
+## 最后更新
 
 YYYY-MM-DD

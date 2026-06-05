@@ -1,71 +1,71 @@
 ---
 name: remo
-description: Maintains Repo Memory for Vibe Coding projects by capturing milestone logs and distilled project knowledge. Use when the user mentions ReMo, Repo Memory, project memory, Vibe Coding knowledge, milestone logs, architecture notes, business process notes, or asks to preserve project context for future development.
+description: 通过里程碑日志和沉淀后的项目知识维护 Vibe Coding 项目的 Repo Memory。用户提到 ReMo、Repo Memory、项目记忆、Vibe Coding 知识、里程碑日志、架构笔记、业务流程笔记，或要求为未来开发保存项目上下文时使用。
 ---
 
 # ReMo
 
-ReMo means Repo Memory. It helps Vibe Coding projects keep two kinds of memory:
+ReMo 是 Repo Memory 的缩写。它帮助 Vibe Coding 项目保存两类记忆：
 
-- Logs: chronological records of meaningful project progress, milestones, and decisions. Logs support retrospective review and are not assumed to be future context.
-- Knowledge: distilled, stable project understanding such as architecture, business flows, product model, terminology, constraints, and FAQs. Knowledge is intended to reduce future codebase scanning and token usage.
+- 日志：按时间记录有意义的项目进展、里程碑和决策。日志用于回溯复盘，默认不作为未来任务上下文加载。
+- 知识：沉淀后的稳定项目理解，例如架构、业务流程、产品模型、术语、约束和常见问题。知识用于减少未来代码扫描和 token 消耗。
 
-ReMo's main purpose is context efficiency: read curated project knowledge first, scan the codebase only when the knowledge base is missing, stale, or too vague.
+ReMo 的核心目标是上下文效率：先读整理过的项目知识，只有当知识库缺失、过期或过于模糊时才扫描代码库。
 
-## Methodology
+## 方法论
 
-ReMo is a context-efficient project memory system for LLM-assisted development.
+ReMo 是面向 LLM 辅助开发的上下文高效项目记忆系统。
 
-Use three principles:
+使用三条原则：
 
-- Route before read: read `.remo/knowledge/index.md` first, then load only the smallest relevant knowledge files.
-- Distill before store: store stable understanding, not raw transcripts, command output, or obvious code facts.
-- Evidence before trust: tie important claims to files, commits, PRs, logs, or explicit user decisions.
+- Route before read：先读 `.remo/knowledge/index.md`，再只加载最小相关知识文件。
+- Distill before store：保存稳定理解，而不是原始 transcript、命令输出或显而易见的代码事实。
+- Evidence before trust：重要结论要关联到文件、commit、PR、日志或明确的用户决策。
 
-Use Context ROI to decide whether something belongs in ReMo:
+使用 Context ROI 判断某条内容是否应该进入 ReMo：
 
 ```text
-Will this memory save more future context than it costs to read?
+这条记忆节省的未来上下文，是否多于读取它本身消耗的上下文？
 ```
 
-Store high-ROI memory:
+应保存高 ROI 记忆：
 
-- Architecture boundaries and data flow.
-- Cross-file business rules.
-- Stable domain concepts and invariants.
-- Important decisions and tradeoffs.
-- Repeated pitfalls, constraints, and gotchas.
-- Conventions future agents must follow.
+- 架构边界和数据流。
+- 跨文件业务规则。
+- 稳定领域概念和不变量。
+- 重要决策和取舍。
+- 重复出现的坑、约束和注意事项。
+- 未来 Agent 必须遵守的约定。
 
-Avoid low-ROI memory:
+避免低 ROI 记忆：
 
-- File-by-file summaries with no insight.
-- Code facts that are obvious from one small file.
-- Temporary debugging noise.
-- Full chat summaries.
-- Raw diffs or command output without durable meaning.
+- 没有洞察的逐文件摘要。
+- 从单个小文件即可看出的代码事实。
+- 临时调试噪声。
+- 完整聊天摘要。
+- 缺少长期意义的原始 diff 或命令输出。
 
-Use SKR, Signal Knowledge Ratio, as the quality bar: every sentence should help future agents understand, decide, or avoid rediscovery.
+使用 SKR（Signal Knowledge Ratio）作为质量标准：每句话都应该帮助未来 Agent 理解、决策或避免重复发现。
 
-## When To Use
+## 何时使用
 
-Use ReMo when:
+以下情况使用 ReMo：
 
-- The user explicitly asks to use ReMo or Repo Memory.
-- A project reaches a meaningful milestone, decision, scope change, or implementation checkpoint.
-- A stable piece of project knowledge emerges from exploration, implementation, debugging, or discussion.
-- The user wants future agents to understand a project without rereading the whole codebase.
+- 用户明确要求使用 ReMo 或 Repo Memory。
+- 项目达到有意义的里程碑、决策点、范围变化或实现检查点。
+- 探索、实现、调试或讨论中产生了稳定项目知识。
+- 用户希望未来 Agent 不必重读整个代码库也能理解项目。
 
-Do not use ReMo for:
+不要将 ReMo 用于：
 
-- Low-value chat summaries.
-- Temporary debugging noise.
-- Raw command output unless it explains a durable decision.
-- Unverified assumptions that should not guide future work.
+- 低价值聊天摘要。
+- 临时调试噪声。
+- 原始命令输出，除非它解释了长期有效的决策。
+- 不应指导未来工作的未验证假设。
 
-## Target Project Layout
+## 目标项目结构
 
-In each project managed by ReMo, prefer:
+每个由 ReMo 管理的项目推荐使用：
 
 ```text
 .remo/
@@ -73,9 +73,9 @@ In each project managed by ReMo, prefer:
 └── knowledge/
 ```
 
-Use `logs/` for time-based project history. Use `knowledge/` for curated project knowledge.
+`logs/` 用于按时间记录项目历史。`knowledge/` 用于整理后的项目知识。
 
-Initialize this knowledge layout:
+初始化以下知识结构：
 
 ```text
 .remo/knowledge/
@@ -90,40 +90,40 @@ Initialize this knowledge layout:
 └── glossary.md
 ```
 
-`index.md` is the required entry point. It maps task types to the smallest useful set of knowledge files.
+`index.md` 是必需入口。它将任务类型映射到最小可用知识文件集合。
 
-ReMo may be introduced after a project already exists. In that case, initialize all knowledge files above so future agents have stable destinations for project knowledge. Files may start as `Status: To be filled`, but they must explain what belongs there and what questions need investigation.
+ReMo 可以后期引入已有项目。此时应初始化上述全部知识文件，让未来 Agent 有稳定的项目知识归档位置。文件可以从 `Status: To be filled` 开始，但必须说明这里应保存什么、还有哪些问题需要调查。
 
-## Recommended Installation
+## 推荐安装方式
 
-For shared projects, keep the canonical ReMo source under `skills/remo/`.
+共享项目中，推荐将 ReMo 的权威来源放在 `skills/remo/`。
 
-To make ReMo persistent in a target project, install a project rule at:
+若要让 ReMo 在目标项目中持续生效，在以下位置安装项目规则：
 
 ```text
 .cursor/rules/remo.mdc
 ```
 
-Use [templates/remo-rule.mdc](templates/remo-rule.mdc) as the starting point. The rule should be `alwaysApply: true` so the agent performs a ReMo check during normal project work, even when the user does not explicitly mention ReMo.
+以 [templates/remo-rule.mdc](templates/remo-rule.mdc) 为起点。规则应设置 `alwaysApply: true`，让 Agent 在普通项目工作中执行 ReMo 检查，即使用户没有明确提到 ReMo。
 
-## Memory Language
+## 记忆语言
 
-Before applying ReMo to a project for the first time, ask the user which language should be used for Repo Memory.
+首次将 ReMo 应用于项目之前，询问用户 Repo Memory 应使用哪种语言。
 
-Record the answer in `.remo/knowledge/project-overview.md` or another appropriate knowledge file. After the language is recorded, keep future log filenames, log entries, and knowledge entries in that language unless the user changes the preference.
+将答案记录在 `.remo/knowledge/project-overview.md` 或其他合适的知识文件中。语言记录后，未来日志文件名、日志内容和知识条目都使用该语言，除非用户改变偏好。
 
-If the user changes the memory language later, update the project overview, knowledge index, and future entries. Existing entries may be translated when consistency matters.
+如果用户之后修改记忆语言，更新项目概览、知识索引和后续条目。需要保持一致时，可以翻译已有条目。
 
-## Workflow
+## 工作流
 
-### Initialize ReMo
+### 初始化 ReMo
 
-When installing ReMo into an existing project:
+将 ReMo 安装到已有项目时：
 
-1. Ask for the memory language.
-2. Create `.remo/logs/` and `.remo/knowledge/`.
-3. Create `.remo/knowledge/index.md`.
-4. Create the baseline knowledge files:
+1. 询问记忆语言。
+2. 创建 `.remo/logs/` 和 `.remo/knowledge/`。
+3. 创建 `.remo/knowledge/index.md`。
+4. 创建基线知识文件：
    - `project-overview.md`
    - `architecture.md`
    - `domain-model.md`
@@ -132,112 +132,112 @@ When installing ReMo into an existing project:
    - `conventions.md`
    - `faq.md`
    - `glossary.md`
-5. Fill what can be safely inferred from existing docs and top-level structure.
-6. For unknown sections, write `Status: To be filled` and list specific open questions.
-7. Add every baseline file to `index.md` with its purpose and task routing.
-8. Create an installation log in `.remo/logs/` using the memory language.
+5. 从现有文档和顶层结构中填入可安全推断的事实。
+6. 对未知部分写入 `Status: To be filled`，并列出具体待确认问题。
+7. 将每个基线文件及其用途、任务路由加入 `index.md`。
+8. 使用记忆语言在 `.remo/logs/` 中创建安装日志。
 
-Do not leave placeholder-only files. Even a newly initialized file should state what it is for, when to read it, and what is unknown.
+不要留下只有占位符的文件。即使是刚初始化的文件，也应说明用途、何时读取，以及哪些内容未知。
 
-### Initialize From GitHub History
+### 从 GitHub 历史初始化
 
-If the project is connected to GitHub or another Git remote during initialization:
+如果初始化时项目已连接 GitHub 或其他 Git remote：
 
-1. Inspect the default branch and commit history.
-2. Group commits into meaningful phases, milestones, pivots, releases, bug-fix clusters, and architecture changes.
-3. Create retrospective log entries for important historical moments only. Do not create one log per commit.
-4. Use commit timestamps for log paths: `.remo/logs/YYYY/MM/DD/HHMM-title-in-memory-language.md`.
-5. Use commit messages, changed file paths, tags, and merge commits as evidence.
-6. Distill stable facts from history into the baseline knowledge files.
-7. Mark lower-confidence conclusions as `Needs review` or list them under open questions.
-8. Record the commit range or evidence source in each generated log or knowledge file.
+1. 检查默认分支和 commit 历史。
+2. 将 commit 分组成有意义的阶段、里程碑、方向调整、发布、缺陷修复簇和架构变化。
+3. 只为重要历史时刻创建回溯日志。不要每个 commit 创建一条日志。
+4. 使用 commit 时间戳生成日志路径：`.remo/logs/YYYY/MM/DD/HHMM-记忆语言标题.md`。
+5. 使用 commit message、变更文件路径、tag 和 merge commit 作为证据。
+6. 将历史中的稳定事实沉淀到基线知识文件中。
+7. 将低置信结论标记为 `Needs review`，或列入待确认问题。
+8. 在每条生成的日志或知识文件中记录 commit 范围或证据来源。
 
-Use history to improve accuracy, not to import noise. Prefer fewer, higher-signal retrospective logs.
+使用历史来提升准确性，而不是导入噪声。优先创建更少、更高信号的回溯日志。
 
-### Start Of Task
+### 任务开始
 
-1. Check whether `.remo/knowledge/index.md` exists.
-2. If it exists, read it before broad codebase exploration.
-3. Use the index to select only the relevant knowledge files for the task.
-4. Scan code only when the knowledge base is missing, stale, contradicted, or not specific enough.
-5. If the project has no recorded memory language, ask the user before writing logs or knowledge entries.
+1. 检查 `.remo/knowledge/index.md` 是否存在。
+2. 如果存在，在大范围探索代码前先读取它。
+3. 使用索引只选择任务相关的知识文件。
+4. 只有当知识库缺失、过期、互相矛盾或不够具体时才扫描代码。
+5. 如果项目尚未记录记忆语言，写入日志或知识前先询问用户。
 
-### End Of Task
+### 任务结束
 
-1. Decide whether the current work produced memory worth saving.
-2. Classify it:
-   - Use `logs/` for milestones, decisions, pivots, releases, experiments, and important iteration events.
-   - Use `knowledge/` for stable knowledge that should help future work.
-3. Apply the Context ROI test. If the memory would not save future context or prevent likely mistakes, do not write it.
-4. Update `.remo/knowledge/index.md` when creating, renaming, or changing the purpose of a knowledge file.
-5. Keep entries concise and source-aware.
-6. Separate facts from open questions.
-7. Prefer updating an existing knowledge file over creating duplicates.
-8. If the user has not asked to edit files, propose the memory entry before writing it.
+1. 判断当前工作是否产生了值得保存的记忆。
+2. 分类：
+   - 用 `logs/` 记录里程碑、决策、方向调整、发布、实验和重要迭代事件。
+   - 用 `knowledge/` 记录应帮助未来工作的稳定知识。
+3. 应用 Context ROI 判断。如果这条记忆不能节省未来上下文或避免高概率错误，不要写入。
+4. 创建、重命名或改变知识文件用途时，更新 `.remo/knowledge/index.md`。
+5. 条目保持简洁，并注明来源。
+6. 区分事实和待确认问题。
+7. 优先更新现有知识文件，避免创建重复主题。
+8. 如果用户没有要求编辑文件，写入前先提出建议。
 
-### Commit And Push Checkpoint
+### Commit 和 Push 检查点
 
-Every commit and push must run a ReMo checkpoint.
+每次 commit 和 push 都必须执行 ReMo checkpoint。
 
-Before committing:
+提交前：
 
-1. Review the staged diff.
-2. Create or update the relevant `.remo/logs/` entry for the work being committed.
-3. Update affected `.remo/knowledge/` files so future agents can understand the change without rediscovering it.
-4. Update `.remo/knowledge/index.md` if knowledge files were added, renamed, removed, or repurposed.
-5. Include the ReMo updates in the same commit when they describe that commit's work.
+1. 检查 staged diff。
+2. 为本次提交的工作创建或更新相关 `.remo/logs/` 条目。
+3. 更新受影响的 `.remo/knowledge/` 文件，让未来 Agent 不必重新发现这次变化。
+4. 如果新增、重命名、删除或改变了知识文件用途，更新 `.remo/knowledge/index.md`。
+5. 如果 ReMo 更新描述的是本次提交的工作，将它们包含在同一个 commit 中。
 
-After pushing:
+推送后：
 
-1. Update the log entry with the commit hash, branch, remote, and push outcome when available.
-2. If the push changed the published state or clarified project knowledge, update the relevant knowledge file.
+1. 在可获取时，用 commit hash、分支、remote 和 push 结果更新日志。
+2. 如果 push 改变了发布状态或澄清了项目知识，更新相关知识文件。
 
-Do not skip the checkpoint because a change feels small. If no durable knowledge changed, write that conclusion in the log with the reason, rather than inventing low-signal knowledge.
+不要因为改动看起来很小就跳过 checkpoint。如果没有长期知识变化，在日志中说明这个结论和原因，而不是编造低信号知识。
 
-## Knowledge Routing
+## 知识路由
 
-Use the smallest relevant context:
+使用最小相关上下文：
 
-- Project direction or scope: read `index.md` and `project-overview.md`.
-- Technical structure: read `index.md` and `architecture.md`.
-- Business behavior: read `index.md`, `domain-model.md`, and `workflows.md`.
-- Implementation style: read `index.md` and `conventions.md`.
-- Prior tradeoffs: read `index.md` and `decisions.md`.
-- Repeated issues: read `index.md` and `faq.md`.
-- Terminology: read `index.md` and `glossary.md`.
+- 项目方向或范围：读取 `index.md` 和 `project-overview.md`。
+- 技术结构：读取 `index.md` 和 `architecture.md`。
+- 业务行为：读取 `index.md`、`domain-model.md` 和 `workflows.md`。
+- 实现风格：读取 `index.md` 和 `conventions.md`。
+- 历史取舍：读取 `index.md` 和 `decisions.md`。
+- 重复问题：读取 `index.md` 和 `faq.md`。
+- 术语：读取 `index.md` 和 `glossary.md`。
 
-If a baseline knowledge file is missing, create it before continuing and update the index.
+如果缺少基线知识文件，继续前先创建它并更新索引。
 
-## Log Entry Guidance
+## 日志条目指南
 
-Create a log entry only when the project changes direction or crosses a useful checkpoint.
+只有当项目改变方向或跨过有价值的检查点时才创建日志条目。
 
-Good log triggers:
+适合写日志的触发条件：
 
-- Product direction, scope, or requirement changed.
-- Architecture, module boundaries, or core data flow changed.
-- A meaningful capability or end-to-end workflow became available.
-- A durable decision was made, including why rejected options were not chosen.
-- A major bug, incident, or risk changed future work.
-- Git history reveals an important historical phase during initialization.
+- 产品方向、范围或需求发生变化。
+- 架构、模块边界或核心数据流发生变化。
+- 有意义的能力或端到端工作流可用了。
+- 做出了长期决策，包括为什么没有选择被否定的方案。
+- 重大 bug、事故或风险改变了未来工作。
+- 初始化期间 Git 历史揭示了重要历史阶段。
 
-Do not log routine edits, minor fixes, typo changes, or one-off failed attempts unless they explain a durable project constraint.
+不要记录日常编辑、小修复、错别字修改或一次性失败尝试，除非它们解释了长期项目约束。
 
-Recommended filename:
+推荐文件名：
 
 ```text
-.remo/logs/YYYY/MM/DD/HHMM-title-in-memory-language.md
+.remo/logs/YYYY/MM/DD/HHMM-记忆语言标题.md
 ```
 
-Store logs in year/month/day folders. Keep the file timestamp numeric for ordering within a day. The title segment should use the project's memory language.
+日志按年/月/日分文件夹保存。文件时间戳保持数字，方便当天排序。标题段使用项目记忆语言。
 
-Use [templates/log-entry.md](templates/log-entry.md).
+使用 [templates/log-entry.md](templates/log-entry.md)。
 
-## Knowledge Entry Guidance
+## 知识条目指南
 
-Create or update a knowledge entry when a durable project concept becomes clear.
+当长期有效的项目概念变清晰时，创建或更新知识条目。
 
-Recommended filenames:
+推荐文件名：
 
 ```text
 .remo/knowledge/architecture.md
@@ -247,21 +247,21 @@ Recommended filenames:
 .remo/knowledge/terminology.md
 ```
 
-Use [templates/knowledge-entry.md](templates/knowledge-entry.md).
+使用 [templates/knowledge-entry.md](templates/knowledge-entry.md)。
 
-## Quality Bar
+## 质量标准
 
-A good ReMo knowledge entry is:
+好的 ReMo 知识条目应当：
 
-- Abstract enough to survive minor code changes.
-- Concrete enough to guide implementation.
-- Short enough to load as context cheaply.
-- Clear about confidence and unknowns.
-- Focused on knowledge that future agents would otherwise rediscover by scanning multiple files.
+- 足够抽象，能经受小幅代码变化。
+- 足够具体，能指导实现。
+- 足够简短，能低成本加载为上下文。
+- 清楚说明置信度和未知项。
+- 聚焦未来 Agent 否则需要扫描多个文件才能重新发现的知识。
 
-A good ReMo log entry is:
+好的 ReMo 日志条目应当：
 
-- Useful for reconstructing how the project evolved.
-- Focused on decisions, milestones, and reasons.
-- Not a transcript of everything that happened.
-- Still meaningful after weeks or months.
+- 有助于重建项目演进过程。
+- 聚焦决策、里程碑和原因。
+- 不是完整过程转写。
+- 数周或数月后仍然有意义。
