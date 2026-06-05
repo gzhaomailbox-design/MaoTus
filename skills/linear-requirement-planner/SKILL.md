@@ -1,19 +1,54 @@
 ---
 name: linear-requirement-planner
-description: Read Linear issues by issue ID, judge whether they describe software requirements, ask strict product-manager clarification questions for ambiguity, create requirement planning documents under docs/01_designing, and comment the plan summary plus GitHub link back to Linear. Use when the user gives a Linear issue ID and asks to turn it into a product or software requirement plan.
+description: Read Linear issues by issue ID, judge whether they describe software requirements, ask strict product-manager clarification questions for ambiguity, create requirement planning documents under docs/01_designing/milestone/<YYYY-MM-DD-milestone-name>, and comment the plan summary plus expected GitHub link back to Linear. Use when the user gives a Linear issue ID and asks to turn it into a product or software requirement plan.
 ---
 
 # Linear 需求规划器
 
 ## 版本
 
-- 当前版本：0.1.0
-- 更新日期：2026-06-03
-- 版本状态：初始仓库版本
+- 当前版本：0.1.6
+- 更新日期：2026-06-05
+- 版本状态：Milestone 固定目录版本
 
 使用或同步本 skill 前，先检查本节版本号与“更新记录”。如果用户级 Cursor skill、其他项目副本或历史文档中的版本更旧，默认以本仓库版本为准；如果版本更新但行为有差异，先阅读更新记录再执行需求规划。
 
 ## 更新记录
+
+### 0.1.6 - 2026-06-05
+
+- 明确最终路径格式为 `docs/01_designing/milestone/<YYYY-MM-DD-milestone-name>/<issue>.md`。
+- 所有 milestone 计划文档都必须位于 `docs/01_designing/milestone/` 下，不能直接放在 `docs/01_designing/` 下。
+- 无 milestone 的计划路径为 `docs/01_designing/milestone/未关联Milestone/<issue-id>-<中文短标题>.md`。
+
+### 0.1.5 - 2026-06-05
+
+- 已废弃的中间口径：曾明确路径格式为 `docs/01_designing/<YYYY-MM-DD-milestone-name>/<issue>.md`。
+- Milestone 文件夹位于 `docs/01_designing/` 下，文件夹名由创建日期和 milestone 名称组成。
+- 无 milestone 的计划路径为 `docs/01_designing/未关联Milestone/<issue-id>-<中文短标题>.md`。
+
+### 0.1.4 - 2026-06-05
+
+- 已废弃的中间口径：曾误解为 milestone 文件夹应位于 `docs` 下。
+- 该口径已被后续版本覆盖；执行时必须以最新版本的 milestone 路径规则为准。
+
+### 0.1.3 - 2026-06-04
+
+- Milestone 文件夹命名改为“创建日期 + milestone 名字”，格式为 `YYYY-MM-DD-<milestone-name>`。
+- 已存在的 milestone 文件夹必须复用，不因后续日期变化而创建第二个同名 milestone 文件夹。
+- 无 milestone 的 issue 仍放入 `docs/01_designing/未关联Milestone/`。
+
+### 0.1.2 - 2026-06-04
+
+- 需求计划文档不再平铺在 `docs/01_designing` 下。
+- 如果 Linear issue 关联 milestone，则放在 `docs/01_designing/<milestone-folder>/` 下；每个 milestone 一个文件夹，相关 design 放入同一文件夹。
+- 如果 Linear issue 没有关联 milestone，则放在 `docs/01_designing/未关联Milestone/` 下。
+
+### 0.1.1 - 2026-06-04
+
+- 计划文档创建或更新后，只生成预期 GitHub 链接，不要求提交或推送。
+- 如果本地文件路径、仓库 remote 和当前分支足以推导链接，直接生成预期 GitHub 链接，不再反复询问用户是否提交或推送。
+- Linear 评论仍可包含计划摘要和预期 GitHub 链接，但必须明确该链接只有在当前分支推送到远端后才可访问。
 
 ### 0.1.0 - 2026-06-03
 
@@ -69,16 +104,62 @@ description: Read Linear issues by issue ID, judge whether they describe softwar
 
 6. 澄清完成后再创建计划。
    - 确认项目中存在 `docs/01_designing`。
-   - 创建 Markdown 文档，文件名使用 issue ID 加中文简短标题，例如 `docs/01_designing/LIN-123-结账流程重设计.md`。
+   - 先确定 Linear issue 关联的 milestone。
+   - 如果 issue 关联 milestone，在 `docs/01_designing/milestone/<milestone-folder>/` 下创建或更新 Markdown 文档；每个 milestone 只创建一个对应文件夹，相关 design 都放在该文件夹中。
+   - 如果 issue 没有关联 milestone，在 `docs/01_designing/milestone/未关联Milestone/` 下创建或更新 Markdown 文档；不要把无 milestone 的计划平铺到 `docs/01_designing` 根目录。
+   - `<milestone-folder>` 使用 milestone 文件夹首次创建日期加 milestone 名称生成，格式为 `YYYY-MM-DD-<milestone-name>`。
+   - 日期使用创建该 milestone 文件夹当天的本地日期；如果对应 milestone 文件夹已存在，必须复用已有文件夹，不要因为日期变化创建新文件夹。
+   - `<milestone-name>` 保留中文、英文、数字和常用连接符；把 `/`、空格和不适合作为路径的字符替换为 `-`，并去掉首尾连接符。
+   - Markdown 文件名使用 issue ID 加中文简短标题，例如 `docs/01_designing/milestone/2026-06-04-支付里程碑/LIN-123-结账流程重设计.md`。
    - 文档文件名和文档内章节标题默认使用简体中文；除 Linear 原始字段名、产品专有名词、API 名称或必要英文 UI 文案外，不要把章节标题写成英文。
    - 如果相关文档已存在，先读取并更新它，不要创建重复文档。
 
 7. 创建或更新计划后，把计划同步到 Linear issue 评论。
-   - 先生成计划文档的 GitHub 地址，不要只使用本地文件路径。链接应指向当前仓库、当前分支上的计划文档；如果无法确认可访问的 GitHub 地址，先向用户说明阻塞并询问如何处理。
-   - 评论内容必须包含：计划摘要、计划文档 GitHub 链接、创建或更新时间。
+   - 先生成计划文档的预期 GitHub 地址，不要只使用本地文件路径。链接应指向当前仓库、当前分支上的计划文档；只要能从 git remote、当前分支和计划文档路径推导出 URL，就直接生成预期链接。
+   - 不要为了让链接立即可访问而要求用户提交或推送；也不要反复询问是否需要提交或推送。
+   - 如果当前分支尚未推送，或计划文档尚未提交，评论中仍使用预期 GitHub 链接，并明确“该链接在当前分支推送到远端后可访问”。
+   - 只有当缺少 git remote、无法识别 GitHub 仓库地址、无法确认当前分支，或本地路径无法映射到仓库相对路径时，才向用户说明阻塞并询问如何处理。
+   - 评论内容必须包含：计划摘要、计划文档预期 GitHub 链接、创建或更新时间。
    - 调用 Linear MCP 写评论前，必须先读取 `save_comment` 工具 descriptor。
    - 使用 Linear `save_comment` 工具，传入 `issueId` 和 Markdown `body` 创建顶层评论。
    - 评论正文使用简体中文；保留 Linear issue ID、GitHub URL、产品名和必要英文术语。
+
+## GitHub 预期链接规则
+
+生成预期 GitHub 链接时：
+
+1. 从 git remote 推导仓库 URL。
+   - 支持 `git@github.com:owner/repo.git`。
+   - 支持 `https://github.com/owner/repo.git`。
+2. 使用当前分支名作为 `blob/<branch>`。
+3. 使用计划文档相对仓库根目录的路径。
+4. 输出格式：
+
+```text
+https://github.com/<owner>/<repo>/blob/<branch>/<path>
+```
+
+该链接是预期链接，不代表文件已经提交或远端已经存在。除非用户明确要求，否则不要为了链接可访问而执行 commit 或 push。
+
+## Milestone 文件夹规则
+
+创建计划文档前，必须先判断 Linear issue 是否有关联 milestone。
+
+- 有 milestone：路径为 `docs/01_designing/milestone/<YYYY-MM-DD>-<milestone-name>/<issue-id>-<中文短标题>.md`。
+- 无 milestone：路径为 `docs/01_designing/milestone/未关联Milestone/<issue-id>-<中文短标题>.md`。
+- 不要把计划文档直接放在 `docs/01_designing/` 根目录。
+- 不要把计划文档直接放在 `docs/01_designing/<milestone-folder>/`；必须保留固定的 `milestone/` 中间目录。
+- 如果目标 milestone 文件夹不存在，创建该文件夹。
+- 新建 milestone 文件夹时，文件夹名前缀日期使用创建当天的本地日期，例如 `2026-06-04-支付里程碑`。
+- 如果 `docs/01_designing/milestone` 下已存在同一 milestone 名称的日期前缀文件夹，复用已有文件夹；不要创建新的日期前缀文件夹。
+- 如果目标文件夹中已有同一 issue ID 开头的计划文档，更新已有文档，不要创建重复文档。
+- 生成预期 GitHub 链接时，必须使用最终分层后的相对路径。
+
+Milestone 信息来源优先级：
+
+1. Linear issue 的明确 milestone 字段。
+2. Linear issue 关系中明确表示 milestone 的字段。
+3. 如果 Linear 返回数据没有 milestone，视为无 milestone；不要用 project、release、label 或用户故事标题猜测 milestone。
 
 ## 计划文档模板
 
@@ -93,6 +174,8 @@ description: Read Linear issues by issue ID, judge whether they describe softwar
 - Linear 标题：[Title]
 - 状态：[Status]
 - 负责人：[Owner if available]
+- Milestone：[Milestone name 或 未关联Milestone]
+- 文档路径：[docs/01_designing/milestone/<YYYY-MM-DD>-<milestone-name>/<file>.md 或 docs/01_designing/milestone/未关联Milestone/<file>.md]
 
 ## 问题
 
@@ -158,4 +241,5 @@ description: Read Linear issues by issue ID, judge whether they describe softwar
 - 如果 issue 文本与用户澄清冲突，指出冲突并询问哪个来源更权威。
 - 计划必须聚焦 Linear issue 中的需求，不引入无关路线图想法。
 - 面向中文项目时，文档文件名、一级标题和章节标题必须使用简体中文。
-- Linear 评论必须包含计划摘要、GitHub 链接和时间；如果没有成功写入评论，最终回复必须明确说明原因。
+- Linear 评论必须包含计划摘要、预期 GitHub 链接和时间；如果没有成功写入评论，最终回复必须明确说明原因。
+- 计划文档必须位于 `docs/01_designing/milestone/<milestone-folder>/` 或 `docs/01_designing/milestone/未关联Milestone/` 下，不得平铺在 `docs/01_designing` 根目录，也不得直接放在 `docs/01_designing/<milestone-folder>/`。
