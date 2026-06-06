@@ -18,8 +18,7 @@ MaoTus 是一个用于管理 Vibe Coding 实践中沉淀出来的 skills 的仓�
 - 每个 skill 都应被当作一个小项目来管理，具备清晰目的、使用规则，以及必要的模板或辅助材料。
 - 对外分享的 skill 以 `skills/<skill-name>/SKILL.md` 作为正式入口，不依赖个人或本地 Cursor 配置目录。
 - MaoTus 的 README、skills、模板、ReMo 日志和知识文件默认使用简体中文；保留必要的路径、命令、API 名、产品名和技术术语原文。
-- `linear-requirement-planner` 已从用户级 Cursor skill 回迁到仓库，入口为 `skills/linear-requirement-planner/SKILL.md`；它用于把 Linear issue 转成严格的中文需求规划文档，计划文档按 milestone 放入 `docs/01_designing/milestone/<YYYY-MM-DD>-<milestone-name>/`，无 milestone 时放入 `docs/01_designing/milestone/未关联Milestone/`，并要求同步计划摘要与预期 GitHub 链接回 Linear 评论，不要求为链接可访问而自动提交或推送。
-- `session-token-auditor` 是仓库内用于分析 Cursor session token 消耗组成的 skill，入口为 `skills/session-token-auditor/SKILL.md`；当前版本通过本地 transcript JSONL 做可解释估算，不提供真实计费 usage。
+- `linear-requirement-planner` 已从用户级 Cursor skill 回迁到仓库，入口为 `skills/linear-requirement-planner/SKILL.md`；它用于把 Linear brief 需求结合当前项目实际情况转成严格的中文实现计划，计划文档必须包含完整测试用例设计，按 milestone 放入 `docs/01_designing/milestone/<YYYY-MM-DD>-<milestone-name>/`，无 milestone 时放入 `docs/01_designing/milestone/未关联Milestone/`，并要求同步计划摘要与预期 GitHub 链接回 Linear 评论，不要求为链接可访问而自动提交或推送。
 - ReMo 推荐通过 `.cursor/rules/remo.mdc` 安装到目标项目中，让 Agent 在日常任务过程中持续执行 ReMo 检查。
 - ReMo 的核心目标是节省上下文：先读 `.remo/knowledge/index.md` 做上下文路由，再按任务读取少量知识文件，只有知识不足时才扫描代码库。
 - ReMo 使用 Context-Efficient Project Memory 方法论：Route before read、Distill before store、Evidence before trust，并用 Context ROI 与 SKR 控制日志和知识的详尽尺度。
@@ -46,7 +45,6 @@ MaoTus 是一个用于管理 Vibe Coding 实践中沉淀出来的 skills 的仓�
 
 - `skills/remo/SKILL.md`
 - `skills/linear-requirement-planner/SKILL.md`
-- `skills/session-token-auditor/SKILL.md`
 - `skills/remo/README.md`
 - `skills/remo/templates/knowledge-index.md`
 - `skills/remo/templates/baseline-knowledge.md`
