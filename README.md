@@ -2,7 +2,7 @@
 
 MaoTus 是一个用于管理 Vibe Coding 实践中沉淀出来的 skills 的仓库。
 
-这个项目收集可复用的工作流、提示词、模板和项目知识，让后续 AI 辅助开发会话能更快进入状态，并使用更准确的上下文。每个 skill 都应被当作一个小项目维护：有明确目的、触发条件、工作流、质量标准，以及必要的模板或辅助材料。
+这个项目收集可复用的工作流、提示词、模板、规格文档和项目知识，让后续 AI 辅助开发会话能更快进入状态，并使用更准确的上下文。每个 skill 都应被当作一个小项目维护：有明确目的、触发条件、工作流、质量标准，以及必要的模板、脚本或参考材料。
 
 ## 当前 Skills
 
@@ -10,12 +10,18 @@ MaoTus 是一个用于管理 Vibe Coding 实践中沉淀出来的 skills 的仓�
 
 入口：[skills/remo/SKILL.md](skills/remo/SKILL.md)
 
-ReMo 是 Repo Memory，用于在仓库演进过程中持续保存项目记忆。它将两类内容分开：
+ReMo 是 Repo Memory，是面向 Coding Agent 的自动项目记忆系统。它从 repo、文档、Git、任务过程和用户决策中提取高信号知识，自动组织为可路由的 Markdown knowledge。
 
-- 过程日志：记录里程碑、决策、方向调整和重要检查点。
-- 项目知识：沉淀架构、业务流程、产品模型、术语、约束和常见问题。
+ReMo 的目标是让未来 Coding Agent 更少读代码、更少重复推理、更少输出无效内容。它允许在任务边界和 Git checkpoint 自动写入正式 `.remo/knowledge/`，但每条知识必须保留 evidence、confidence、scope、source_paths、last_verified 和失效信号。
 
-ReMo 的目标是上下文效率：未来任务先读整理过的知识，再决定是否需要扫描代码库。
+ReMo 安装后会把自己暴露到 Agent 入口：通用入口 `AGENTS.md` 和 Cursor 入口 `.cursor/rules/remo.mdc`。这样 Codex、Cursor 等 Agent 更容易在普通 coding 任务中先读取 `.remo/knowledge/index.md` 并执行 ReMo checkpoint。
+
+规格文档：
+
+- [Architecture](skills/remo/specs/architecture.md)
+- [Metadata](skills/remo/specs/metadata.md)
+- [Agent Protocol](skills/remo/specs/agent-protocol.md)
+- [Commands](skills/remo/specs/commands.md)
 
 ### Linear 需求规划器
 
@@ -35,11 +41,16 @@ Linear 需求规划器用于按 Linear issue ID 读取 brief 需求，结合当�
 
 ```text
 .
+├── AGENTS.md
 ├── README.md
 ├── skills/
 │   ├── remo/
+│   │   ├── specs/
+│   │   ├── templates/
+│   │   └── scripts/
 │   └── linear-requirement-planner/
 └── .remo/
+    ├── config.yml
     ├── logs/
     └── knowledge/
 ```
@@ -50,11 +61,12 @@ Linear 需求规划器用于按 Linear issue ID 读取 brief 需求，结合当�
 skills/<skill-name>/SKILL.md
 ```
 
-如果 skill 需要模板、脚本或参考材料，应放在对应 skill 目录内，例如：
+如果 skill 需要模板、脚本、规格或参考材料，应放在对应 skill 目录内，例如：
 
 ```text
 skills/<skill-name>/templates/
 skills/<skill-name>/scripts/
+skills/<skill-name>/specs/
 skills/<skill-name>/references/
 ```
 
@@ -62,8 +74,7 @@ skills/<skill-name>/references/
 
 - README、skills、模板、ReMo 日志和知识文件默认使用简体中文。
 - 保留必要的路径、命令、API 名、产品名和技术术语原文。
-- 新增 skill 时，先把工作流定义清楚，第一版保持轻量。
-- 只有当手动流程被验证有价值后，再加入脚本、hooks 或自动化。
+- 新增 skill 时，先把工作流、接口和质量标准定义清楚。
 - 删除、重命名或改变 skill 目的时，同步更新 README 和 `.remo/knowledge/project-overview.md`。
 - 对外分享的 skill 不依赖个人或本地 Cursor 配置目录，仓库内 `skills/<skill-name>/SKILL.md` 是权威来源。
 
@@ -71,9 +82,15 @@ skills/<skill-name>/references/
 
 本仓库本身也使用 ReMo：
 
-- `.remo/logs/` 记录重要项目进展。
-- `.remo/knowledge/` 保存供未来任务复用的高信号项目知识。
+- `.remo/config.yml` 保存自动记忆配置。
+- `.remo/knowledge/index.md` 是任务路由入口。
+- `.remo/knowledge/` 保存供未来 Coding Agent 复用的正式项目知识。
+- `.remo/logs/` 记录自动写入、Git checkpoint 和重要项目进展。
 
-处理 MaoTus 自身时，先读 `.remo/knowledge/index.md` 做上下文路由。重要里程碑写入 `.remo/logs/YYYY/MM/DD/`，稳定项目理解写入 `.remo/knowledge/`。
+处理 MaoTus 自身时，先读 `.remo/knowledge/index.md` 做上下文路由。任务结束和 Git checkpoint 应自动更新相关 knowledge，并写入 `.remo/logs/YYYY/MM/DD/`。
 
-Commit 和 push 是 ReMo checkpoint：提交前应包含对应日志和必要知识更新；推送后在日志中记录 commit hash、分支、remote 和推送结果（可获取时）。
+可运行检查器确认结构、metadata 和索引：
+
+```sh
+sh skills/remo/scripts/remo-check.sh
+```

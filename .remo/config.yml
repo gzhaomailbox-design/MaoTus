@@ -1,0 +1,40 @@
+version: 1
+memory_language: 简体中文
+
+automation:
+  triggers:
+    task_start: route
+    task_end: absorb
+    pre_commit: checkpoint
+    post_push: checkpoint
+  file_watcher: false
+  auto_write_formal_knowledge: true
+  auto_commit: false
+
+sources:
+  repo: true
+  git: true
+  agent_task: true
+  user_decisions: true
+  external_integrations: false
+
+quality:
+  minimum_evidence_for_active: 1
+  low_confidence_status: needs_review
+  stale_on_missing_source_path: true
+
+knowledge:
+  index: .remo/knowledge/index.md
+  maps_dir: .remo/knowledge/maps
+  topics_dir: .remo/knowledge/topics
+  required_sections:
+    - Summary
+    - When To Read
+    - Current Knowledge
+    - Agent Guidance
+    - Evidence
+    - Invalidation Signals
+
+ignore_paths:
+  - .git/
+  - .remo/logs/

@@ -1,48 +1,47 @@
-# 知识文件标题
+---
+id: baseline-topic-id
+title: Baseline Knowledge Title
+type: map
+status: needs_review
+scope:
+  - repo
+confidence: low
+last_verified: YYYY-MM-DD
+source_paths: []
+evidence:
+  - type: agent_observation
+    ref: initialization
+supersedes: []
+related: []
+---
 
-## 状态
+# Baseline Knowledge Title
 
-待补充 | 草稿 | 当前有效 | 需要复核 | 已废弃
+## Summary
 
-## 记忆语言
+初始化时创建的基线知识位置。即使内容不足，也必须说明用途、读取时机和待确认问题。
 
-[选择的记忆语言]
+## When To Read
 
-## 用途
+- 说明未来 Agent 在什么任务中读取本文件。
 
-说明这个文件应保存什么内容，以及未来 Agent 应在什么任务中读取它。
+## Current Knowledge
 
-## 当前理解
+- Status: To be filled.
 
-- 已知事实或原则。
-- 已知事实或原则。
-- 已知事实或原则。
+## Agent Guidance
 
-## 实践指导
+- 补充本文件时优先使用 repo 文件、文档、Git 历史或用户决策作为证据。
+- 不要写入无证据的长期约束。
 
-说明未来 Agent 或贡献者应如何使用这些知识。
+## Evidence
 
-## Context ROI
+- 暂无强证据。
 
-说明这个文件为什么能节省未来上下文，或避免高概率错误。
+## Invalidation Signals
 
-## 证据
+- 项目结构、业务范围或技术栈变化后需要复核。
 
-- 支持这些知识的文件、commit、PR、日志或用户决策。
-
-## 相关文件
-
-- `path/to/file`
-
-## 待确认问题
+## Open Questions
 
 - 需要调查的具体未知项。
-- 需要调查的具体未知项。
-
-## 索引更新
-
-确保 `.remo/knowledge/index.md` 将相关任务类型路由到本文件。
-
-## 最后更新
-
-YYYY-MM-DD

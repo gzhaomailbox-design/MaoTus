@@ -6,43 +6,40 @@
 .remo/logs/YYYY/MM/DD/HHMM-记忆语言标题.md
 ```
 
-日志按年/月/日分文件夹保存。文件时间戳保持数字，方便当天排序。标题段使用项目记忆语言。
+## Type
 
-## 类型
+auto_absorb | git_checkpoint | milestone | decision | pivot | release | incident | retrospective
 
-里程碑 | 决策 | 方向调整 | 实验 | 发布 | 事故 | 回溯
+## Summary
 
-## 摘要
+用短段落说明 ReMo 这次记录或自动写入了什么。
 
-用一个短段落说明发生了什么变化，或学到了什么。
+## Trigger
 
-## 背景
+- Task boundary
+- Commit checkpoint
+- Push checkpoint
+- Manual command
+- User decision
 
-说明这件事为什么在当前项目阶段重要。
+## Knowledge Changes
 
-## 关键细节
+- Created:
+- Updated:
+- Marked stale:
+- No durable change:
 
-- 细节 1。
-- 细节 2。
-- 细节 3。
+## Evidence
 
-## 决策或结果
+- 相关文件、commit、diff、用户决策、Agent observation 或外部引用。
 
-说明决定了什么、完成了什么、暂停了什么、否定了什么或学到了什么。
-
-## Commit 和 Push
+## Commit And Push
 
 - Commit：hash 或 `尚未提交`
 - Branch：分支名
 - Remote：相关时记录 remote 名称和 URL
 - Push 结果：已推送、尚未推送、失败或不适用
-- 知识更新：哪些 `.remo/knowledge/` 文件发生变化，或为什么没有长期知识变化
 
-## 后续
+## Follow-up
 
-- [ ] 后续动作。
-- [ ] 待确认问题。
-
-## 来源
-
-- 相关文件、commit、PR、聊天上下文或外部引用。
+- [ ] 后续动作或待确认问题。

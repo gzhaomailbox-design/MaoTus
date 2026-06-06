@@ -1,62 +1,46 @@
-# 知识索引
+# ReMo Knowledge Index
 
-## 记忆语言
+## Memory Language
 
 简体中文
 
-## 使用方式
+## How To Use
 
-在扫描代码库之前，先阅读本索引。根据任务类型选择最小必要知识文件；只有当知识缺失、过期、互相矛盾或不够具体时，再按需扫描代码库。
+任务开始时先读本索引。根据任务意图选择最小 knowledge 集合；只有当 knowledge 缺失、过期、冲突或不够具体时，再扫描 repo。
 
-## 任务路由
+## Route Map
 
-| 任务类型 | 优先阅读 |
-| --- | --- |
-| 了解项目定位、范围、当前方向 | `project-overview.md` |
-| 了解 ReMo 的目标和当前设计 | `project-overview.md` |
-| 新增或调整 skill 项目 | `project-overview.md` |
-| 判断是否需要更新项目知识 | `project-overview.md` |
-| 判断日志或知识是否详略得当 | `project-overview.md`，并参考 `skills/remo/SKILL.md` 的 Methodology 和 Quality Bar |
-| 准备 commit 或 push | `project-overview.md`，并执行 `skills/remo/SKILL.md` 的 Commit And Push Checkpoint |
-| 将 ReMo 后期安装到已有项目 | `project-overview.md`，并参考 `skills/remo/templates/knowledge-index.md` 和 `skills/remo/templates/baseline-knowledge.md` |
-| 根据 GitHub commit 历史回溯项目日志和知识 | `project-overview.md`，并参考 `skills/remo/SKILL.md` 的初始化流程 |
-| 查找尚未沉淀的技术架构、业务流程、约定、FAQ | 查看下方“已知缺口” |
+| Task Intent | Required Knowledge | Optional Knowledge |
+| --- | --- | --- |
+| 了解 MaoTus 项目定位、当前 skills、维护约定 | `project-overview.md` | `skills/remo/SKILL.md` |
+| 设计、修改或实现 ReMo 自动记忆系统 | `project-overview.md`, `skills/remo/SKILL.md` | `skills/remo/specs/architecture.md`, `skills/remo/specs/agent-protocol.md`, `skills/remo/specs/metadata.md`, `skills/remo/specs/commands.md` |
+| 修改 ReMo metadata、模板或检查规则 | `project-overview.md`, `skills/remo/specs/metadata.md` | `skills/remo/templates/knowledge-entry.md`, `skills/remo/scripts/remo-check.sh` |
+| 修改 Agent 协议、AGENTS.md 或 Cursor rule | `project-overview.md`, `skills/remo/specs/agent-protocol.md` | `AGENTS.md`, `.cursor/rules/remo.mdc`, `skills/remo/templates/AGENTS.md`, `skills/remo/templates/remo-rule.mdc` |
+| 准备 commit 或 push | `project-overview.md`, `skills/remo/specs/agent-protocol.md` | `sh skills/remo/scripts/remo-check.sh` |
+| 处理 Linear 需求规划器 | `project-overview.md`, `skills/linear-requirement-planner/SKILL.md` | README |
 
-## 当前知识文件
+## Knowledge Files
 
-### `project-overview.md`
+| File | Type | Status | When To Read |
+| --- | --- | --- | --- |
+| `project-overview.md` | map | active | MaoTus 项目高层上下文、ReMo 当前方向、skills 清单和维护约定 |
 
-说明 MaoTus 的项目定位、ReMo 的角色、记忆语言、当前实践方式和未决问题。
+## Missing Knowledge
 
-适合在处理项目方向、skill 结构、ReMo 规则、知识库维护时优先阅读。
+| Missing File | Creation Condition | Intended Use |
+| --- | --- | --- |
+| `maps/architecture.md` | MaoTus 出现稳定脚本、CLI、发布方式或多模块自动化后 | 技术结构、数据流和自动化边界 |
+| `maps/modules.md` | skills 数量或共享脚本增加后 | skill/module 职责和边界 |
+| `topics/conventions.md` | 文件命名、metadata、模板或测试规则稳定后 | 仓库维护和实现约定 |
+| `topics/decisions.md` | 决策数量增加，需要集中索引后 | 长期产品和技术取舍 |
 
-## 已知缺口
+## Maintenance Rules
 
-这些文件代表未来可能需要沉淀的知识类型；当前项目还没有足够内容，因此暂不创建空文件。
+- 新增、删除、重命名或废弃 knowledge 文件时，更新本索引。
+- 自动写入正式 knowledge 后，同步更新 Route Map 和 Knowledge Files。
+- `status: stale` 或 `needs_review` 的文件可以被路由，但任务开始时必须重新验证。
+- 日志文件不默认进入路由，除非某条日志是决策或事故的重要证据。
 
-- `architecture.md`：当仓库出现稳定技术结构、脚本、自动化或发布方式时创建。
-- `domain-model.md`：当 MaoTus 形成明确的 skill 元模型、分类体系或数据结构时创建。
-- `workflows.md`：当 ReMo 或其他 skills 形成可复用工作流时创建。
-- `decisions.md`：当技术或产品决策变多，需要集中索引时创建。
-- `conventions.md`：当文件命名、skill 编写、模板风格形成稳定约定时创建。
-- `faq.md`：当重复问题出现时创建。
-- `glossary.md`：当术语变多，且需要统一解释时创建。
+## Last Updated
 
-## 维护规则
-
-- 新增、删除、重命名知识文件时，必须更新本索引。
-- 知识文件用途发生变化时，必须更新“当前知识文件”说明。
-- 不要为了完整目录而创建空知识文件；只在有稳定内容时创建。
-- 日志文件不列入本索引，除非某条日志成为重要决策来源。
-- `.remo/logs/` 按年月日分文件夹存储，路径格式为 `.remo/logs/YYYY/MM/DD/HHMM-记忆语言标题.md`。
-- `.remo/logs/` 的文件名标题段和日志内容都应使用当前记忆语言。
-- `.remo/knowledge/` 的知识内容应使用当前记忆语言。
-- ReMo 初始化到已有项目时，应创建完整基线知识文档集合，并用 `Status: To be filled` 标记尚未确认的内容。
-- 如果项目关联了 GitHub 或其他 Git remote，初始化时应分析 commit 历史，把重要阶段回溯成高信号日志，并用历史证据校准基线知识文件。
-- 写入日志或知识前必须应用 Context ROI：只有当记忆能减少未来上下文成本、避免重复推理或降低错误风险时才写入。
-- 使用 SKR 作为写作标准：每句话都应帮助未来 Agent 理解、决策或避免重复发现。
-- 每次 commit 和 push 都是强制 ReMo checkpoint：必须生成或更新日志，并同步受影响的知识文件和索引。
-
-## 最后更新
-
-2026-05-31
+2026-06-06

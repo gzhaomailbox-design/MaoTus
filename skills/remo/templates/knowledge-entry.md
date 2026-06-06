@@ -1,55 +1,47 @@
-# 知识主题
+---
+id: stable-kebab-case-id
+title: Knowledge Title
+type: map | topic | decision | convention | workflow | module | faq | glossary
+status: active | needs_review | stale | deprecated
+scope:
+  - repo
+confidence: high | medium | low
+last_verified: YYYY-MM-DD
+source_paths:
+  - path/to/source
+evidence:
+  - type: file | git | log | user_decision | agent_observation
+    ref: path-or-commit-or-log
+supersedes: []
+related: []
+---
 
-## 语言
+# Knowledge Title
 
-本项目 Repo Memory 选择使用的语言。
+## Summary
 
-## 状态
+用短段落说明这条知识帮助未来 Agent 少读什么、少猜什么、避免什么错误。
 
-待补充 | 草稿 | 当前有效 | 需要复核 | 已废弃
+## When To Read
 
-## 摘要
+- 哪些任务应读取本文件。
+- 哪些任务不需要读取本文件。
 
-用尽可能短但有用的方式解释这条知识。
+## Current Knowledge
 
-## 适用范围
+- 稳定事实、规则或约定。
+- 跨文件或跨模块的理解。
+- 需要未来 Agent 遵守的约束。
 
-说明这条知识在项目中的适用位置或任务范围。
+## Agent Guidance
 
-## 当前理解
+- 未来 Agent 应如何使用这条知识。
+- 修改相关代码时应检查哪些证据。
 
-- 事实或原则 1。
-- 事实或原则 2。
-- 事实或原则 3。
+## Evidence
 
-## 实践指导
+- `path/to/source`：说明证据支持了什么。
 
-说明未来 Agent 或贡献者应如何使用这条知识。
+## Invalidation Signals
 
-## Context ROI
-
-说明为什么这条知识值得加载，而不是每次从代码库重新发现。
-
-## 证据
-
-- 支持这条知识的文件、commit、PR、日志或用户决策。
-
-## 相关文件
-
-- `path/to/file`
-
-## 索引更新
-
-如果这是新的知识文件，更新 `.remo/knowledge/index.md`，说明：
-
-- 本文件的用途。
-- 哪些任务类型应该读取它。
-- 它是否替代或重叠已有知识文件。
-
-## 待确认问题
-
-- 仍需验证的未知项或假设。
-
-## 最后更新
-
-YYYY-MM-DD
+- 哪些文件、模块、流程或用户决策变化后，本知识需要标记为 `needs_review` 或 `stale`。

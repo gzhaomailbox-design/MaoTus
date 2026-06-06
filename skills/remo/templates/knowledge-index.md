@@ -1,83 +1,48 @@
-# 知识索引
+# ReMo Knowledge Index
 
-## 记忆语言
+## Memory Language
 
 [选择的记忆语言]
 
-## 使用方式
+## How To Use
 
-大范围探索代码库之前先读取本索引。根据任务选择最小可用知识文件集合。只有当知识库缺失、过期、互相矛盾或不够具体时才扫描代码。
+任务开始时先读取本索引。根据任务意图选择最小 knowledge 集合。只有当知识缺失、过期、冲突或不够具体时才扫描 repo。
 
-## 任务路由
+## Route Map
 
-| 任务类型 | 优先读取 |
-| --- | --- |
-| 项目方向、范围或当前状态 | `project-overview.md` |
-| 技术结构、运行时、部署或数据流 | `architecture.md` |
-| 业务实体、领域概念或数据关系 | `domain-model.md` |
-| 用户流程、运营流程或可复用流程 | `workflows.md` |
-| 历史取舍或重要选择 | `decisions.md` |
-| 编码风格、命名、API、测试或仓库约定 | `conventions.md` |
-| 重复问题或已知问题 | `faq.md` |
-| 术语、缩写或领域词汇 | `glossary.md` |
+| Task Intent | Required Knowledge | Optional Knowledge |
+| --- | --- | --- |
+| 项目方向、范围、当前状态 | `project-overview.md` | `maps/project.md` |
+| 架构、模块边界、数据流 | `maps/architecture.md` | `maps/modules.md`, related topics |
+| 领域实体、业务规则、不变量 | `maps/domain.md` | `topics/*` |
+| 用户流程、运营流程、开发流程 | `maps/workflows.md` | related workflow topics |
+| 编码约定、测试、命名、API 模式 | `topics/conventions.md` | `topics/testing.md` |
+| 决策、取舍、被否定方案 | `topics/decisions.md` | related logs |
+| 常见坑、排查路径、事故经验 | `topics/faq.md` | related logs |
 
-## 知识文件
+## Knowledge Files
 
-### `project-overview.md`
+列出所有正式 knowledge 文件。所有已存在文件都必须在本节或 Route Map 中被提及。
 
-用途：记录项目目标、范围、当前方向、记忆语言和高层上下文。
+| File | Type | Status | When To Read |
+| --- | --- | --- | --- |
+| `project-overview.md` | map | active | 项目高层上下文 |
 
-状态：待补充
+## Missing Knowledge
 
-### `architecture.md`
+列出应补齐但当前还没有足够证据生成的地图或主题。
 
-用途：记录技术架构、模块、服务、数据流、运行时、部署和集成。
+| Missing File | Creation Condition | Intended Use |
+| --- | --- | --- |
+| `maps/architecture.md` | 架构边界、模块或运行方式稳定后 | 技术结构和数据流 |
 
-状态：待补充
+## Maintenance Rules
 
-### `domain-model.md`
+- 新增、删除、重命名或废弃 knowledge 文件时，更新本索引。
+- 自动写入正式 knowledge 后，同步更新 Route Map 和 Knowledge Files。
+- `status: stale` 或 `needs_review` 的文件可以被路由，但必须在任务开始时提示需要重新验证。
+- 日志文件不默认进入路由，除非某条日志是决策或事故的重要证据。
 
-用途：记录业务或领域实体、关系、不变量和重要数据概念。
-
-状态：待补充
-
-### `workflows.md`
-
-用途：记录用户旅程、运营流程、开发工作流、导入导出流程和其他可复用流程。
-
-状态：待补充
-
-### `decisions.md`
-
-用途：记录长期有效的产品和技术决策、取舍、被否定方案及原因。
-
-状态：待补充
-
-### `conventions.md`
-
-用途：记录编码约定、文件命名、API 模式、测试实践、风格规则和仓库特定规范。
-
-状态：待补充
-
-### `faq.md`
-
-用途：记录重复问题、常见坑、排查笔记和已知注意事项。
-
-状态：待补充
-
-### `glossary.md`
-
-用途：记录领域术语、缩写、内部名称和共享词汇。
-
-状态：待补充
-
-## 维护规则
-
-- 新增、删除、重命名或改变知识文件用途时，更新本索引。
-- 保持任务路由有效。
-- 日志文件名标题段、日志内容和知识内容使用记忆语言。
-- 优先更新现有基线文件，避免创建重复知识文件。
-
-## 最后更新
+## Last Updated
 
 YYYY-MM-DD
