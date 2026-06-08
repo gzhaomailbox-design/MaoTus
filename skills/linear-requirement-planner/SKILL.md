@@ -1,19 +1,32 @@
 ---
 name: linear-requirement-planner
-description: 按 issue ID 读取 Linear 问题，结合当前项目实际情况把 brief 需求转成可执行实现计划，对模糊点提出严格澄清问题，按 Milestone 文件夹规则创建包含完整测试用例设计的中文需求规划文档，并把计划摘要和预期 GitHub 链接评论回 Linear。用户提供 Linear issue ID 并要求转成产品、软件需求、实现计划或测试计划时使用。
+description: 按 issue ID 读取 Linear 问题，结合当前项目实际情况把 brief 需求转成可执行实现计划，对模糊点提出严格澄清问题，按 Milestone 文件夹规则创建包含完整测试用例设计的中文需求规划文档，并把计划摘要、预期 GitHub 链接评论回 Linear，同时将最新计划文档作为附件上传，并用 save_document 把全文同步到 issue 关联 Linear Document 以便在线预览。用户提供 Linear issue ID 并要求转成产品、软件需求、实现计划或测试计划时使用。
 ---
 
 # Linear 需求规划器
 
 ## 版本
 
-- 当前版本：0.1.9
-- 更新日期：2026-06-06
-- 版本状态：测试用例与执行阶段 ReMo 说明版本
+- 当前版本：0.2.1
+- 更新日期：2026-06-08
+- 版本状态：Linear 计划文档评论 + 附件 + Document 全文同步版本
 
 使用或同步本 skill 前，先检查本节版本号与“更新记录”。如果用户级 Cursor skill、其他项目副本或历史文档中的版本更旧，默认以本仓库版本为准；如果版本更新但行为有差异，先阅读更新记录再执行需求规划。
 
 ## 更新记录
+
+### 0.2.1 - 2026-06-08
+
+- 计划同步新增 **8c `save_document`**：把步骤 7 落盘的计划 Markdown **全文**写入 issue 关联的 Linear Document，便于在线预览；禁止上传摘要版或截断版。
+- Document 创建：`save_document` + `title`（建议 `需求规划 - <issue-id> - <中文短标题>`）+ `issue` + `content`（全文）；更新：传入已有 `id` 或 `slugId` + `content`。
+- 评论、附件、Document 三者互补：评论放摘要与链接，附件保留下载副本，Document 提供在线阅读；Document 失败不阻塞评论与附件。
+- 最终回复须分别说明评论、附件、Document 各自成败；成功时评论或最终回复应附上 Document URL。
+
+### 0.2.0 - 2026-06-08
+
+- 计划创建或更新后，除 `save_comment` 同步摘要和预期 GitHub 链接外，必须把最新计划文档作为 issue 附件上传，方便在 Linear 内直接查阅。
+- 附件上传使用 `prepare_attachment_upload` → 客户端 PUT 原文件 → `create_attachment_from_upload`；不要用已废弃的 `create_attachment` base64 路径。
+- 附件失败不阻塞评论；最终回复必须说明评论与附件各自的成败。
 
 ### 0.1.9 - 2026-06-06
 
@@ -60,7 +73,7 @@ description: 按 issue ID 读取 Linear 问题，结合当前项目实际情况�
 
 - 从用户级 Cursor skill `/Users/never/.cursor/skills/linear-requirement-planner/SKILL.md` 回迁到 MaoTus 仓库。
 - 建立 Linear issue 到中文需求规划文档的工作流：读取 issue、严格澄清、生成 `docs/01_designing` 文档，并同步计划摘要与 GitHub 链接回 Linear 评论。
-- 明确必须先读取 Linear MCP tool descriptor，再调用 `get_issue` 或 `save_comment`。
+- 明确必须先读取 Linear MCP tool descriptor，再调用 `get_issue`、`save_comment` 或附件相关工具。
 
 ## 角色
 
@@ -121,15 +134,46 @@ description: 按 issue ID 读取 Linear 问题，结合当前项目实际情况�
    - 文档文件名和文档内章节标题默认使用简体中文；除 Linear 原始字段名、产品专有名词、API 名称或必要英文 UI 文案外，不要把章节标题写成英文。
    - 如果相关文档已存在，先读取并更新它，不要创建重复文档。
 
-8. 创建或更新计划后，把计划同步到 Linear issue 评论。
+8. 创建或更新计划后，把计划同步到 Linear issue。
    - 先生成计划文档的预期 GitHub 地址，不要只使用本地文件路径。链接应指向当前仓库、当前分支上的计划文档；只要能从 git remote、当前分支和计划文档路径推导出 URL，就直接生成预期链接。
    - 不要为了让链接立即可访问而要求用户提交或推送；也不要反复询问是否需要提交或推送。
    - 如果当前分支尚未推送，或计划文档尚未提交，评论中仍使用预期 GitHub 链接，并明确“该链接在当前分支推送到远端后可访问”。
    - 只有当缺少 git remote、无法识别 GitHub 仓库地址、无法确认当前分支，或本地路径无法映射到仓库相对路径时，才向用户说明阻塞并询问如何处理。
+
+   **8a. 写评论**
    - 评论内容必须包含：计划摘要、计划文档预期 GitHub 链接、创建或更新时间。
    - 调用 Linear MCP 写评论前，必须先读取 `save_comment` 工具 descriptor。
    - 使用 Linear `save_comment` 工具，传入 `issueId` 和 Markdown `body` 创建顶层评论。
    - 评论正文使用简体中文；保留 Linear issue ID、GitHub URL、产品名和必要英文术语。
+
+   **8b. 上传计划文档附件**
+   - 评论写入后，把刚创建或更新的计划文档作为 issue 附件上传，方便在 Linear 内直接打开全文，不依赖 GitHub 链接是否已可访问。
+   - “最新设计文档”指本次步骤 7 写入磁盘的计划 Markdown 文件，即 `docs/01_designing/milestone/.../<issue-id>-<中文短标题>.md`。
+   - 调用附件相关 Linear MCP 工具前，必须先读取 `prepare_attachment_upload` 和 `create_attachment_from_upload` 工具 descriptor。
+   - 上传流程：
+     1. 确认计划文档已落盘；记录绝对路径、文件名、精确字节大小（`wc -c <path>` 或等价方式）。
+     2. 调用 `prepare_attachment_upload`：`issue` 为 issue ID；`filename` 为计划文档文件名；`contentType` 为 `text/markdown`；`size` 为精确字节数；`title` 建议 `需求规划 - <issue-id> - <中文短标题>`；`subtitle` 可写文档创建或更新时间。
+     3. 在 60 秒内将文件原样 PUT 到返回的 `uploadRequest.url`。`uploadRequest.headers` 中的每个 header 必须原样发送，不得改写大小写、遗漏或自行添加；推荐：
+
+```sh
+curl -sS -X PUT --data-binary @'<plan-doc-path>' \
+  -H '<header-from-uploadRequest>' \
+  '<uploadRequest.url>'
+```
+
+     4. PUT 成功后调用 `create_attachment_from_upload`，传入 `issue`、`assetUrl`（来自 prepare 返回值）、`title`、`subtitle`。
+   - 优先使用上述直接上传流程；不要用已废弃的 `create_attachment` base64 路径，除非文件极小且直接上传确实失败。
+   - 若是更新已有计划，上传新的附件版本；Linear 会保留历史附件，评论中说明“已附最新版计划文档”即可。
+   - 附件上传失败不撤销或阻塞评论；最终回复必须分别说明评论与附件是否成功，以及失败原因。
+
+   **8c. 同步 Linear Document 全文（在线预览）**
+   - 评论与附件完成后，把计划文档**全文**同步到 issue 关联的 Linear Document。`.md` 附件在 Linear 内通常只能下载，Document 才支持在线阅读。
+   - `content` 必须从步骤 7 落盘文件读取**完整 Markdown**，禁止摘要版、截断版或手工改写后上传。
+   - 调用 `save_document` 前，必须先读取其工具 descriptor。
+   - 若 issue 尚无关联 Document：调用 `save_document` 创建，必填 `title`（建议 `需求规划 - <issue-id> - <中文短标题>`）、`issue`（issue ID）、`content`（全文）。
+   - 若 issue 已有同主题 Document（此前创建或本次已创建）：调用 `save_document` 更新，传入已有 `id` 或 `slugId` + `content`（全文）。
+   - Linear 保存时可能对 Markdown 做自动规范化（如 `HEL-27` 转 issue 链接、列表符号统一）；语义须与仓库全文一致。
+   - Document 同步失败不撤销或阻塞评论与附件；最终回复须分别说明评论、附件、Document 成败；Document 成功时，在评论或最终回复附上 Document URL。
 
 ## GitHub 预期链接规则
 
@@ -147,6 +191,29 @@ https://github.com/<owner>/<repo>/blob/<branch>/<path>
 ```
 
 该链接是预期链接，不代表文件已经提交或远端已经存在。除非用户明确要求，否则不要为了链接可访问而执行 commit 或 push。
+
+## Linear 计划同步规则
+
+计划同步到 Linear 时，评论、附件、Document 三者互补，不是二选一：
+
+- 评论（8a）：计划摘要、预期 GitHub 链接、时间；成功时附上 Document URL。
+- 附件（8b）：最新计划 Markdown 文件副本，便于下载归档。
+- Document（8c）：计划 Markdown **全文**在线预览；`.md` 附件通常无法内嵌预览，Document 是 Linear 内阅读全文的首选方式。
+
+附件要求：
+
+1. 附件内容必须是本次写入的最新计划文档，不得上传过期副本或空文件。
+2. `filename` 使用计划文档真实文件名；`title` 使用中文，便于在 Linear 附件列表中识别。
+3. 上传必须在 `prepare_attachment_upload` 返回签名 URL 后 60 秒内完成 PUT，否则重新 prepare 再传。
+4. PUT 必须发送原始字节，不要 base64 编码、不要改写 Markdown 内容。
+5. 评论成功但附件失败时，仍视为计划已同步到 Linear，但必须在最终回复中明确附件失败及补救方式（Document URL、GitHub 预期链接或本地路径）。
+
+Document 要求：
+
+1. `content` 必须从步骤 7 落盘文件读取**全文**，禁止摘要版或截断版。
+2. 创建时 `title` 建议 `需求规划 - <issue-id> - <中文短标题>`，并关联 `issue`。
+3. 更新已有 Document 时传入 `id` 或 `slugId`，不要重复创建同主题 Document。
+4. Document 失败不阻塞评论与附件；最终回复须说明 Document 成败及可替代的查阅方式。
 
 ## Milestone 文件夹规则
 
@@ -282,5 +349,7 @@ Milestone 信息来源优先级：
 - 计划必须聚焦 Linear issue 中的需求，不引入无关路线图想法。
 - 面向中文项目时，文档文件名、一级标题和章节标题必须使用简体中文。
 - Linear 评论必须包含计划摘要、预期 GitHub 链接和时间；如果没有成功写入评论，最终回复必须明确说明原因。
+- 计划文档必须作为 Linear issue 附件上传；如果没有成功上传附件，最终回复必须明确说明原因，并指出可通过 Document URL、GitHub 预期链接或本地文档路径查阅。
+- 计划文档全文必须同步到 issue 关联 Linear Document（`save_document`）；如果没有成功同步 Document，最终回复必须明确说明原因，并指出可通过附件、GitHub 预期链接或本地文档路径查阅。
 - 计划文档路径必须符合 `## Milestone 文件夹规则`。
 - 计划文档必须包含 `## 执行阶段 ReMo 记忆`，并明确 ReMo 只在计划被执行且产生稳定项目变化后调用，创建计划时不要调用。
