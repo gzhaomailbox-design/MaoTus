@@ -42,7 +42,7 @@ MaoTus 是一个用于管理 Vibe Coding 实践中沉淀出来的 skills 的仓�
 - 每个 skill 应有明确目的、触发条件、工作流、质量标准，以及必要模板、脚本或规格文档。
 - 对外分享的 skill 以 `skills/<skill-name>/SKILL.md` 作为正式入口，不依赖个人或本地 Cursor 配置目录。
 - README、skills、模板、ReMo 日志和知识文件默认使用简体中文；路径、命令、API 名、产品名和技术术语保留原文。
-- `linear-requirement-planner` 位于 `skills/linear-requirement-planner/SKILL.md`，用于把 Linear brief 需求结合项目实际情况转成中文实现计划；计划完成后会把摘要和预期 GitHub 链接评论回 Linear，把最新计划文档作为 issue 附件上传，并用 `save_document` 把全文同步到关联 Linear Document 以便在线预览。
+- `linear-requirement-planner` 位于 `skills/linear-requirement-planner/SKILL.md`，用于把 Linear brief 需求结合项目实际情况转成中文实现计划；计划完成后会把摘要和预期 GitHub 链接评论回 Linear，并用 `save_document` 把全文同步到关联 Linear Document 以便在线预览（不上传重复附件）。
 - ReMo 位于 `skills/remo/SKILL.md`，当前方向是自动项目记忆系统：任务边界和 Git checkpoint 自动更新正式 Markdown knowledge。
 - ReMo 安装后必须暴露到 Agent 常规入口：通用 `AGENTS.md` 和 Cursor `.cursor/rules/remo.mdc`。
 - ReMo 使用 Markdown + YAML frontmatter 作为正式知识载体，并用 `.remo/knowledge/index.md` 做任务路由。
