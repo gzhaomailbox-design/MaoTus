@@ -87,6 +87,13 @@ if [ ! -d ".remo/logs" ]; then
   fail "missing .remo/logs/"
 fi
 
+for file in $(find .remo/logs -type f -name '*.md' 2>/dev/null | sort); do
+  base=$(basename "$file")
+  if ! printf '%s' "$base" | grep -Eq '^[0-9]{4}-'; then
+    fail "log filename must start with HHMM-: $file (see skills/remo/templates/log-entry.md)"
+  fi
+done
+
 if [ ! -d ".remo/knowledge" ]; then
   fail "missing .remo/knowledge/"
 fi
@@ -138,8 +145,8 @@ for file in $(find .remo/knowledge -type f -name '*.md' ! -name 'index.md' 2>/de
 done
 
 if [ -f ".cursor/rules/remo.mdc" ]; then
-  if ! grep -Fq "skills/remo/SKILL.md" ".cursor/rules/remo.mdc"; then
-    fail ".cursor/rules/remo.mdc does not mention skills/remo/SKILL.md"
+  if ! grep -Eq "(\.cursor/skills/remo/SKILL\.md|skills/remo/SKILL\.md)" ".cursor/rules/remo.mdc"; then
+    fail ".cursor/rules/remo.mdc does not mention ReMo canonical SKILL.md path"
   fi
   if ! grep -Fq ".remo/knowledge/index.md" ".cursor/rules/remo.mdc"; then
     fail ".cursor/rules/remo.mdc does not mention .remo/knowledge/index.md"
@@ -152,8 +159,8 @@ if [ -f "AGENTS.md" ]; then
   if ! grep -Fq "ReMo Project Memory" "AGENTS.md"; then
     fail "AGENTS.md does not contain a ReMo Project Memory section"
   fi
-  if ! grep -Fq "skills/remo/SKILL.md" "AGENTS.md"; then
-    fail "AGENTS.md does not mention skills/remo/SKILL.md"
+  if ! grep -Eq "(\.cursor/skills/remo/SKILL\.md|skills/remo/SKILL\.md)" "AGENTS.md"; then
+    fail "AGENTS.md does not mention ReMo canonical SKILL.md path"
   fi
   if ! grep -Fq ".remo/knowledge/index.md" "AGENTS.md"; then
     fail "AGENTS.md does not mention .remo/knowledge/index.md"
@@ -165,10 +172,10 @@ fi
 if git diff --cached --quiet 2>/dev/null; then
   :
 else
-  if git diff --cached --name-only | grep -Eq '^"?\.remo/logs/'; then
+  if git diff --cached --name-only | grep -Eq '^"?\.remo/'; then
     :
   else
-    warn "staged changes exist without a staged .remo/logs/ entry; confirm whether this commit needs a ReMo checkpoint"
+    warn "staged changes exist without a staged .remo/ entry; the whole .remo/ knowledge base is git-tracked—add .remo/ changes unless this commit is truly knowledge-free"
   fi
 fi
 

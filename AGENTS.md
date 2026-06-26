@@ -15,7 +15,7 @@ At task end:
 1. Identify durable project knowledge created or invalidated by the work.
 2. Update `.remo/knowledge/` automatically when evidence thresholds are met.
 3. Update `.remo/knowledge/index.md` when knowledge files are added, renamed, deprecated, or repurposed.
-4. Write a `.remo/logs/YYYY/MM/DD/` entry summarizing knowledge changes or explaining why no durable knowledge changed.
+4. Write a `.remo/logs/YYYY/MM/DD/HHMM-简体中文标题.md` entry summarizing knowledge changes or explaining why no durable knowledge changed (`HHMM` = 24h local time; unique per day).
 
 Before finishing meaningful work, run when practical:
 

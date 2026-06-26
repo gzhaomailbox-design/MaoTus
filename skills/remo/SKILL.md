@@ -68,6 +68,7 @@ ReMo 使用 Context-Efficient Project Memory：
 - `.remo/knowledge/maps/`：顶层地图，如 project、architecture、domain、workflows、modules。
 - `.remo/knowledge/topics/`：细分主题页，如 testing、deployment、ui-conventions、feature-specific topics。
 - `.remo/logs/`：自动运行、里程碑、checkpoint 和写入摘要；默认不作为任务上下文加载。
+- **整个 `.remo/` 目录**（`config.yml`、`knowledge/`、`logs/` 等）默认纳入 Git 版本库（`config.yml` 的 `git.track_all: true`）。
 
 轻量项目可以先只创建 `index.md` 和 `project-overview.md`，但所有已存在知识文件都必须被索引路由，且 `index.md` 必须记录未来应补齐的地图或主题。
 
@@ -175,7 +176,9 @@ sh skills/remo/scripts/remo-check.sh
 2. 判断 diff 是否改变长期项目理解。
 3. 自动更新受影响 knowledge。
 4. 写入 checkpoint 日志，说明更新了哪些知识；如没有长期知识变化，说明原因。
-5. Push 后补充 commit hash、branch、remote 和 push 结果。
+5. **`git status --short .remo/`**；有变更则 **`git add .remo/`**，与业务代码同批 stage、**同一 commit**。**禁止**只提交源码而遗漏 ReMo；**勿等用户提醒**「记得 ReMo」。仅当用户明确说不要提交 ReMo 时可例外。
+6. 运行 `sh skills/remo/scripts/remo-check.sh`；staged 有业务改动但无 `.remo/` 时不得 commit。
+7. Push 后补充 commit hash、branch、remote 和 push 结果。
 
 ## 安装方式
 
