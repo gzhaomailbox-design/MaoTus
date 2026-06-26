@@ -35,7 +35,7 @@ ReMo 权威来源：`skills/remo/SKILL.md`。
 - 生成 memory delta：新增知识、更新知识、失效知识、证据、置信度和适用范围。
 - 满足证据阈值时自动更新 `.remo/knowledge/`。
 - 新增、重命名、废弃或改变 knowledge 用途时更新 `.remo/knowledge/index.md`。
-- 在 `.remo/logs/YYYY/MM/DD/` 记录自动写入摘要。
+- 在 `.remo/logs/YYYY/MM/DD/HHMM-简体中文标题.md` 记录自动写入摘要（`HHMM` 为 24 小时制本地时间，同日多条须唯一）。
 
 Commit 和 push checkpoint：
 
@@ -43,6 +43,22 @@ Commit 和 push checkpoint：
 - 自动更新相关 knowledge 和 checkpoint 日志。
 - 如果没有长期知识变化，在日志中说明原因，不要编造低信号知识。
 - 推送后，在可获取时用 commit hash、branch、remote 和 push 结果更新日志。
+- **整个 `.remo/` 目录默认纳入 Git 管理**（项目知识库：`config.yml`、`knowledge/`、`logs/`、`maps/`、`topics/` 等）。`config.yml` 的 `ignore_paths` 只表示路由/扫描时不加载日志作上下文，不等于 `.gitignore`。
+
+## Git 提交（强制，勿等用户提醒）
+
+以下触发任一即适用：用户说 commit / 提交 / push / 发 PR / 搞上去；或 Agent 执行任何 `git commit`。
+
+1. **先查 ReMo**：`git status --short .remo/`
+2. **有变更必 stage**：`git add .remo/`（与业务代码同批 stage，不要分两次让用户补提）
+3. **commit 前必跑**：`sh skills/remo/scripts/remo-check.sh`
+4. **默认同 commit**：`.remo/` 与本次业务改动进**同一个 commit**；仅当用户**明确**说「不要提交 ReMo / 只提交代码」时可例外
+5. **禁止漏交**：已 stage 业务代码但 `.remo/` 仍有未 stage 变更时，**不得**执行 `git commit`
+
+任务收尾（有意义的工作结束前）：
+
+- 再次 `git status --short .remo/`；若本会话写过 knowledge/logs 且仍有未提交变更，而用户已要求或即将 commit/push/PR，**自动纳入**，无需用户二次提醒「记得 ReMo」
+- 若用户全程未要求提交但 `.remo/` 有变更：收尾回复中列出待提交文件（兜底，不应常态发生）
 
 正式 knowledge 要求：
 

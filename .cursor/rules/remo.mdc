@@ -35,7 +35,7 @@ At task end:
 - Produce a memory delta: new knowledge, updated knowledge, stale knowledge, evidence, confidence, and scope.
 - Update `.remo/knowledge/` automatically when evidence thresholds are met.
 - Update `.remo/knowledge/index.md` when knowledge files are added, renamed, deprecated, or their purpose changes.
-- Write a `.remo/logs/YYYY/MM/DD/` entry summarizing automatic knowledge changes.
+- Write a `.remo/logs/YYYY/MM/DD/HHMM-简体中文标题.md` entry summarizing automatic knowledge changes (`HHMM` = 24h local time; unique per day).
 
 Commit and push checkpoint:
 
@@ -43,6 +43,17 @@ Commit and push checkpoint:
 - Update affected knowledge and checkpoint logs automatically.
 - If no durable knowledge changed, state the reason in the log.
 - After pushing, update the log with commit hash, branch, remote, and push outcome when available.
+- The entire `.remo/` directory is git-tracked by default (`config.yml`, `knowledge/`, `logs/`, etc.). `ignore_paths` in config means routing/scan exclusion, not `.gitignore`.
+
+## Git Commit (mandatory)
+
+Applies when the user asks to commit/push/open PR, or when the agent runs `git commit`:
+
+1. Check ReMo first: `git status --short .remo/`
+2. Stage any `.remo/` changes: `git add .remo/` (same batch as business code)
+3. Run before commit: `sh skills/remo/scripts/remo-check.sh`
+4. Default: same commit for `.remo/` and business changes; skip only if user explicitly says not to include ReMo
+5. Do not commit if business code is staged but `.remo/` changes remain unstaged
 
 Formal knowledge requirements:
 

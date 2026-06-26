@@ -44,7 +44,7 @@ stale_knowledge:
     reason: string
 ```
 
-ReMo 合并后必须更新索引和日志。
+ReMo 合并后必须更新索引和日志。日志文件名必须为 `.remo/logs/YYYY/MM/DD/HHMM-简体中文标题.md`（`HHMM` 为 24 小时制本地时间，同日多条须唯一）；模板见 `skills/remo/templates/log-entry.md`。
 
 ## Commit Checkpoint
 
@@ -55,6 +55,7 @@ Commit 前：
 3. 自动更新相关 knowledge。
 4. 写入 checkpoint 日志。
 5. 如果没有长期知识变化，在日志写明原因。
+6. 将本次 `.remo/` 下新增或修改的文件与代码变更一并纳入 Git stage（整个 `.remo/` 目录默认受版本库跟踪）。
 
 Push 后：
 

@@ -6,12 +6,14 @@ status: active
 scope:
   - repo
 confidence: high
-last_verified: 2026-06-08
+last_verified: 2026-06-27
 source_paths:
   - AGENTS.md
   - README.md
   - skills/remo/SKILL.md
   - skills/linear-requirement-planner/SKILL.md
+  - skills/remo/scripts/remo-check.sh
+  - .cursor/rules/remo.mdc
   - .remo/config.yml
 evidence:
   - type: file
@@ -56,7 +58,8 @@ MaoTus 是一个用于管理 Vibe Coding 实践中沉淀出来的 skills 的仓�
 - 修改 ReMo 自动记忆设计时，同时检查 `skills/remo/SKILL.md`、`skills/remo/specs/`、`AGENTS.md` 和 `.cursor/rules/remo.mdc`，避免 README、模板和规则副本互相冲突。
 - 新增或重命名 knowledge 文件时，必须更新 `.remo/knowledge/index.md`。
 - 自动写入 knowledge 后，运行 `sh skills/remo/scripts/remo-check.sh` 检查 frontmatter、路由和 source path。
-- Commit/push 前后应留下 `.remo/logs/YYYY/MM/DD/` 记录，说明本次是否改变长期项目知识。
+- ReMo 的 `remo-check.sh` 校验日志文件名 `HHMM-` 前缀、frontmatter、索引路由，并在 staged 业务改动时提醒纳入整个 `.remo/`。
+- Commit/push 时 `.remo/` 必须与业务代码同批 stage、同一 commit；commit 前须跑 `sh skills/remo/scripts/remo-check.sh`。
 
 ## Evidence
 
