@@ -90,7 +90,7 @@ fi
 for file in $(find .remo/logs -type f -name '*.md' 2>/dev/null | sort); do
   base=$(basename "$file")
   if ! printf '%s' "$base" | grep -Eq '^[0-9]{4}-'; then
-    fail "log filename must start with HHMM-: $file (see skills/remo/templates/log-entry.md)"
+    fail "log filename must start with HHMM-: $file (use sh skills/remo/scripts/remo-log-path.sh; see skills/remo/templates/log-entry.md)"
   fi
 done
 

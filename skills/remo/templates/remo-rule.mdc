@@ -35,7 +35,7 @@ ReMo 权威来源：`skills/remo/SKILL.md`。
 - 生成 memory delta：新增知识、更新知识、失效知识、证据、置信度和适用范围。
 - 满足证据阈值时自动更新 `.remo/knowledge/`。
 - 新增、重命名、废弃或改变 knowledge 用途时更新 `.remo/knowledge/index.md`。
-- 在 `.remo/logs/YYYY/MM/DD/HHMM-简体中文标题.md` 记录自动写入摘要（`HHMM` 为 24 小时制本地时间，同日多条须唯一）。
+- 记录自动写入摘要：**禁止**手写或推断 `YYYY/MM/DD/HHMM-` 前缀；**必须**运行 `sh skills/remo/scripts/remo-log-path.sh "简体中文标题"`，写入 stdout 路径（仓库机器本地 `date`，非云端/会话时区）。
 
 Commit 和 push checkpoint：
 

@@ -144,10 +144,11 @@ remo checkpoint --git
 remo check
 ```
 
-当前仓库提供轻量检查器：
+当前仓库提供轻量脚本：
 
 ```sh
-sh skills/remo/scripts/remo-check.sh
+sh skills/remo/scripts/remo-log-path.sh "中文标题"   # 生成本地时间日志路径（写入前必用）
+sh skills/remo/scripts/remo-check.sh                   # remo check
 ```
 
 脚本是 `remo check` 的可移植初版，负责检查 `.remo` 结构、knowledge frontmatter、索引路由、source path、Cursor rule 和 staged checkpoint 提醒。命令细节见 `skills/remo/specs/commands.md`。
@@ -168,7 +169,13 @@ sh skills/remo/scripts/remo-check.sh
 2. ReMo 将 delta 合并到现有 knowledge。
 3. 更新 `last_verified`、`source_paths`、`evidence`、`related`。
 4. 如新增、移动或废弃知识文件，更新 `index.md`。
-5. 写入 `.remo/logs/YYYY/MM/DD/HHMM-中文标题.md` 记录本次自动写入摘要。
+5. 写入 ReMo 日志记录本次自动写入摘要。**禁止**自行推断、心算或手写 `YYYY/MM/DD/HHMM-` 前缀（Cursor 云端/会话时区 ≠ 仓库机器本地时区，会与 git commit 时区严重不符）。**必须**先运行：
+
+```sh
+sh skills/remo/scripts/remo-log-path.sh "中文标题"
+```
+
+将 stdout 作为日志路径再写入；`HHMM` 仅来自脚本内 `date`（仓库机器本地 24 小时制）。同日同分钟冲突时脚本自动追加 `-2`、`-3` 后缀。
 
 ### Git checkpoint
 

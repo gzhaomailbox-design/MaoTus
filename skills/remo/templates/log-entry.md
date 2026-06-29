@@ -1,10 +1,12 @@
 # YYYY-MM-DD HH:MM 记忆语言标题
 
-推荐文件名：
+获取日志路径（**禁止**手写 `HHMM-` 或自行推断时区；Cursor 云端 Agent 必须用 shell 取仓库机器本地 `date`）：
 
-```text
-.remo/logs/YYYY/MM/DD/HHMM-记忆语言标题.md
+```sh
+sh skills/remo/scripts/remo-log-path.sh "记忆语言标题"
 ```
+
+stdout 示例：`.remo/logs/YYYY/MM/DD/HHMM-记忆语言标题.md`
 
 ## Type
 

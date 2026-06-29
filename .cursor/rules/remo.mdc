@@ -35,7 +35,7 @@ At task end:
 - Produce a memory delta: new knowledge, updated knowledge, stale knowledge, evidence, confidence, and scope.
 - Update `.remo/knowledge/` automatically when evidence thresholds are met.
 - Update `.remo/knowledge/index.md` when knowledge files are added, renamed, deprecated, or their purpose changes.
-- Write a `.remo/logs/YYYY/MM/DD/HHMM-简体中文标题.md` entry summarizing automatic knowledge changes (`HHMM` = 24h local time; unique per day).
+- Write a ReMo log entry summarizing automatic knowledge changes. **Do not** hand-write or infer `YYYY/MM/DD/HHMM-` (cloud/session timezone ≠ repo machine local time). **Must** run `sh skills/remo/scripts/remo-log-path.sh "简体中文标题"` and write to its stdout path.
 
 Commit and push checkpoint:
 

@@ -44,7 +44,7 @@ stale_knowledge:
     reason: string
 ```
 
-ReMo 合并后必须更新索引和日志。日志文件名必须为 `.remo/logs/YYYY/MM/DD/HHMM-简体中文标题.md`（`HHMM` 为 24 小时制本地时间，同日多条须唯一）；模板见 `skills/remo/templates/log-entry.md`。
+ReMo 合并后必须更新索引和日志。日志路径**禁止手写** `YYYY/MM/DD/HHMM-` 前缀；**必须**运行 `sh skills/remo/scripts/remo-log-path.sh "简体中文标题"`，用 stdout 作为路径（脚本以仓库机器 `date` 生成本地 24 小时制 `HHMM`，同日同分钟冲突自动加后缀）。模板见 `skills/remo/templates/log-entry.md`。
 
 ## Commit Checkpoint
 

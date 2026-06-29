@@ -65,3 +65,15 @@ Commit 前必须说明：
 - staged changes 是否需要 checkpoint 日志。
 
 当前 `skills/remo/scripts/remo-check.sh` 是该命令的轻量 shell 实现。
+
+## `remo-log-path`（脚本）
+
+生成 ReMo 日志文件路径，供 Agent 写入前调用：
+
+```sh
+sh skills/remo/scripts/remo-log-path.sh "简体中文标题"
+```
+
+- 使用仓库机器本地 `date` 生成 `YYYY/MM/DD/HHMM-` 前缀。
+- 禁止 Agent 自行推断或手写前缀（避免 Cursor 云端/会话时区与本地 git 时区不一致）。
+- 同日同分钟冲突时自动追加 `-2`、`-3` 等后缀。
